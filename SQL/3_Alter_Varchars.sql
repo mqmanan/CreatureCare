@@ -1,0 +1,8 @@
+﻿ALTER TABLE UserProfile
+ALTER COLUMN ImageLocation VARCHAR (999);
+
+ALTER TABLE Creature
+ALTER COLUMN ImageLocation VARCHAR (999);
+
+ALTER TABLE Creature
+ALTER COLUMN Description VARCHAR (999);
