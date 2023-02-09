@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 import { getAllCreatures } from "../modules/creatureManager";
-import Creature from './Creature';
+import CreatureCard from "./CreatureCard";
 
 const CreatureList = () => {
+    const navigate = useNavigate();
     const [creatures, setCreatures] = useState([]);
 
-    const getCreatures = () => {
-        getAllCreatures().then(tags => setCreatures(tags));
-    };
-
     useEffect(() => {
-        getCreatures();
+        getAllCreatures().then((creature) => setCreatures(creature));
     }, []);
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                {creatures.map((creature) => (
-                    <Creature creature={creature} key={creature.id} />
-                ))}
+        <>
+
+            <Button onClick={() => { navigate("/patients/add") }}>Add</Button>
+
+
+            <div className="container">
+                <div className="row justify-content-center">
+                    {creatures.map((creature) => (
+                        <CreatureCard creature={creature} key={creature.id} />
+                    ))}
+                </div>
             </div>
-        </div>
+
+        </>
     );
 }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CreatureCare.Models
 {
@@ -11,10 +12,7 @@ namespace CreatureCare.Models
         public string FirebaseUserId { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
+        public string FullName { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -25,16 +23,17 @@ namespace CreatureCare.Models
         [Required]
         public string Telephone { get; set; }
 
-        //[Required]
-        //public string ImageLocation { get; set; }
+        public string ImageLocation { get; set; }
 
         [Required]
-        public int UserTypeId { get; set; }
+        public DateTime DateCreated { get; set; }
 
-        [Required]
         public int SpecialtyId { get; set; }
+        public Specialty Specialty { get; set; }
 
-        //public UserType UserType { get; set; }
+        public int UserTypeId { get; set; }
+        public UserType UserType { get; set; }
 
+        public Creature Creature { get; set; }
     }
 }

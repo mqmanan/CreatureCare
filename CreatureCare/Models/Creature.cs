@@ -20,16 +20,15 @@ namespace CreatureCare.Models
         public string Gender { get; set; }
 
         [Required]
-        public DateTime Birthdate { get; set; }
-
-        [Required]
-        public int UserProfileId { get; set; }
+        public string Birthdate { get; set; }
 
         public string ImageLocation { get; set; }
 
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
+
+        public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
     }

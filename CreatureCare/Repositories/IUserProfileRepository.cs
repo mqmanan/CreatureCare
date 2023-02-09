@@ -1,4 +1,6 @@
-﻿using CreatureCare.Models;
+﻿using System.Collections.Generic;
+using CreatureCare.Models;
+using CreatureCare.Utils;
 
 namespace CreatureCare.Repositories
 {
@@ -6,5 +8,7 @@ namespace CreatureCare.Repositories
     {
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         void Add(UserProfile userProfile);
+        UserProfile GetUserByIdWithUserType(int id);
+        List<UserProfile> GetAll();
     }
 }
