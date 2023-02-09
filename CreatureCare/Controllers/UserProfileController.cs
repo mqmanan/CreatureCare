@@ -38,6 +38,12 @@ namespace CreatureCare.Controllers
             return Ok();
         }
 
+        [HttpGet ("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_userProfileRepository.GetAll());
+        }
+
         [HttpPost]
         public IActionResult Register(UserProfile userProfile)
         {
@@ -47,5 +53,12 @@ namespace CreatureCare.Controllers
             return CreatedAtAction(
                 nameof(GetByFirebaseUserId), new { firebaseUserId = userProfile.FirebaseUserId }, userProfile);
         }
+
+        [HttpGet("GetUserByIdWithUserType/{id}")]
+        public IActionResult GetUserByIdWithUserType(int id)
+        {
+            return Ok(_userProfileRepository.GetUserByIdWithUserType(id));
+        }
+
     }
 }
