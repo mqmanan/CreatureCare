@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, FormGroup, Label, Input } from "reactstrap";
-import { getCreature, updateCreature } from "../modules/creatureManager";
-import { getAllUserProfiles } from "../modules/userProfileManager";
+import { getCreature, updateCreature } from "../../modules/creatureManager";
 
 export default function EditCreature() {
     const navigate = useNavigate()
     const { id } = useParams()
 
     // initial state of object or array will be empty
-    const [users, setUsers] = useState([]);
     const [userChoices, setUserChoices] = useState({
         id: 0,
         name: "",
@@ -28,12 +26,7 @@ export default function EditCreature() {
         getCreature(id).then(setUserChoices);
     }, [])
 
-    // will render userProfiles for drop down menu
-    useEffect(() => {
-        getAllUserProfiles().then((user) => setUsers(user));
-    }, []);
-
-    // how the data is handled in the form
+    // how the data is captured in the form
     const handleInputChange = (event) => {
         const copy = { ...userChoices }
         copy[event.target.id] = event.target.value

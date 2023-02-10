@@ -103,6 +103,25 @@ export const updateCreature = (creature) => {
     });
 };
 
+export const creatureRemove = (creature) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${creature.id}/deactivate`, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(creature),
+        }).then((resp) => {
+            if (!resp.ok) {
+                throw new Error(
+                    "An error occured while deleting this file."
+                );
+            }
+        });
+    });
+};
+
 
 
 

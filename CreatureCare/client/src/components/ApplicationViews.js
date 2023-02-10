@@ -1,13 +1,13 @@
 import React from "react";
-// import { BrowserRouter as Routes, Route, Navigate, } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import Hello from "./Hello";
-import CreatureList from "./CreatureList";
-import EditCreature from "./EditCreature";
-import AddCreature from "./AddCreature";
-import CreatureDetails from "./CreatureDetails";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Hello from "./homeNavBar/Hello";
+import CreatureList from "./creatures/CreatureList";
+import EditCreature from "./creatures/EditCreature";
+import AddCreature from "./creatures/AddCreature";
+import CreatureDetails from "./creatures/CreatureDetails";
+import AppointmentList from "./appoinments/AppointmentList";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -27,6 +27,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Route path="patients/:id" element={<CreatureDetails />} />
 
                     <Route path="patients/:id/edit" element={<EditCreature />} />
+
+                    <Route path="appointments" element={<AppointmentList />} />
+
+                    <Route path="appointments/add" element={<AddCreature />} />
 
                     <Route path="login" element={<Login />} />
 

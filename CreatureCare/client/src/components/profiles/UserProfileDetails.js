@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Card } from "reactstrap";
-import { getUserProfileDetails } from "../modules/userProfileManager";
+import { getUserProfileDetails } from "../../modules/userProfileManager";
 
 
 const UserProfileDetails = () => {

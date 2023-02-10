@@ -13,7 +13,7 @@ import {
     DropdownMenu,
     DropdownItem,
 } from 'reactstrap';
-import { logout } from '../modules/authManager';
+import { logout } from '../../modules/authManager';
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,8 +44,8 @@ export default function Header({ isLoggedIn }) {
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>Appoinments</DropdownToggle>
                                     <DropdownMenu end>
-                                        <DropdownItem tag={RRNavLink} to="/appointment">Schedule Appointment</DropdownItem>
-                                        <DropdownItem tag={RRNavLink} to="/appointment">Appointment Tracker</DropdownItem>
+                                        <DropdownItem tag={RRNavLink} to="/appointments/add">Schedule Appointment</DropdownItem>
+                                        <DropdownItem tag={RRNavLink} to="/appointments">Appointment Tracker</DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>Reset</DropdownItem>
                                     </DropdownMenu>
