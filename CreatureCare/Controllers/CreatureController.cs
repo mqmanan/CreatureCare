@@ -26,7 +26,7 @@ namespace CreatureCare.Controllers
 
         // GET: api/<CreatureController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             //var currentUserProfile = GetCurrentUserProfile();
             //if (currentUserProfile.UserType.Name != "User")
@@ -63,10 +63,10 @@ namespace CreatureCare.Controllers
         [HttpPost]
         public IActionResult Post(Creature creature)
         {
-            //var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //cookie
-            //var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
+            var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
 
-           //creature.UserProfileId = user.Id;
+           creature.UserProfileId = user.Id;
 
             _creatureRepository.Add(creature);
 
@@ -80,10 +80,25 @@ namespace CreatureCare.Controllers
             return Ok(creature);
         }
 
-        //private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
-        //}
+        [HttpPatch("{id}/deactivate")]
+        public IActionResult SoftDeleteCreature(int id)
+        {
+            try
+            {
+                _creatureRepository.Deactivate(id);
+            }
+            catch
+            { 
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }

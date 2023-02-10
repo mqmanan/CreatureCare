@@ -24,6 +24,7 @@ namespace CreatureCare
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ICreatureRepository, CreatureRepository>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

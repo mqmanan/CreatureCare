@@ -1,7 +1,7 @@
 import { Card, Button } from "reactstrap";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCreatureById } from "../modules/creatureManager";
+import { creatureRemove, getCreatureById } from "../../modules/creatureManager";
 
 const CreatureDetails = () => {
     const navigate = useNavigate();
@@ -11,6 +11,16 @@ const CreatureDetails = () => {
     useEffect(() => {
         getCreatureById(id).then((creature) => setCreature(creature));
     }, []);
+
+    const handleDeleteButton = (e) => {
+        e.preventDefault();
+
+        return creatureRemove(creature)
+            .then(() => {
+                alert("This patient's file will be deleted!")
+                navigate("/patients")
+            })
+    }
 
     return (
         <>
@@ -47,7 +57,7 @@ const CreatureDetails = () => {
 
             <Button onClick={() => { navigate(`/patients/${id}/edit`) }}>Edit</Button>
 
-            <Button onClick={() => { navigate(`/patients/${id}/edit`) }}>Delete</Button>
+            <Button type="submit" onClick={handleDeleteButton}>Delete</Button>
 
         </>
     );

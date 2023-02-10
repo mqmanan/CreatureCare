@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, FormGroup, Label, Input } from "reactstrap";
-import { addCreature } from "../modules/creatureManager";
-import { getAllUserProfiles } from "../modules/userProfileManager";
+import { addCreature } from "../../modules/creatureManager";
+import { getAllUserProfiles } from "../../modules/userProfileManager";
 
-export default function AddCreature() {
+export default function AddAppointment() {
     const navigate = useNavigate();
-    const { Id } = useParams;
+
+    // initial state of object or array will be empty
     const [users, setUsers] = useState([]);
     const [creatureForm, setCreatureForm] = useState({
         id: 0,
@@ -20,15 +21,23 @@ export default function AddCreature() {
         description: ""
     })
 
+    // will render the userProfiles array for drop down menu
+    useEffect(() => {
+        getAllUserProfiles().then((user) => setUsers(user));
+    }, []);
+
+    // how the data is captured in the form
     const handleInputChange = (event) => {
         const copy = { ...creatureForm }
         copy[event.target.id] = event.target.value
         setCreatureForm(copy)
     }
 
+    // what will be sent to the api
     const handleSaveButtonClick = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //prevents page from reloading
 
+        // data from handleInputChange which is originally the state but now with new info
         const newCreature = { ...creatureForm }
 
         if (
@@ -44,10 +53,6 @@ export default function AddCreature() {
                 .then(() => { navigate("/patients") });
         }
     };
-
-    useEffect(() => {
-        getAllUserProfiles().then((user) => setUsers(user));
-    }, []);
 
     return (
         <>
@@ -106,6 +111,13 @@ export default function AddCreature() {
                     type="text"
                     placeholder="Add image url"
                     value={creatureForm.imageLocation}
+                    onChange={handleInputChange}
+                />
+
+                <Input
+                    id="userProfileId"
+                    type="hidden"
+                    value={creatureForm.userProfileId}
                     onChange={handleInputChange}
                 />
 

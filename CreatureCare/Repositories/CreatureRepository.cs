@@ -24,7 +24,8 @@ namespace CreatureCare.Repositories
                     cmd.CommandText = @"
                         SELECT c.Id 'CreatureId', c.UserProfileId 'UPId', c.Name, c.Type, c.Origin, c.Gender, c.Birthdate, UserProfile.FullName, UserProfile.Email, UserProfile.Telephone, c.ImageLocation, c.Description
                         FROM Creature c
-                        JOIN UserProfile ON UserProfile.Id = c.UserProfileId;";
+                        JOIN UserProfile ON UserProfile.Id = c.UserProfileId
+                        WHERE IsActive = 1;";
 
                     var reader = cmd.ExecuteReader();
 
@@ -152,7 +153,7 @@ namespace CreatureCare.Repositories
                                 Birthdate = DbUtils.GetString(reader, "Birthdate"),
                                 ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                                 Description = DbUtils.GetString(reader, "Description"),
-                                IsActive= reader.GetBoolean(reader.GetOrdinal("IsActive")),
+                                IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                 UserProfile = new UserProfile()
                                 {
                                     Id = DbUtils.GetInt(reader, "UPId"),
@@ -211,5 +212,26 @@ namespace CreatureCare.Repositories
             }
         }
 
+        public void Deactivate(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Creature
+                        SET IsActive = 0 
+                        WHERE Id = @Id
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
     }
 }
+
