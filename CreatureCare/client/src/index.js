@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { BrowserRouter } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,7 +16,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 
   <App />
-  ,
 );
 
 reportWebVitals();

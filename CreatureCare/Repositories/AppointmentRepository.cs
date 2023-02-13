@@ -23,7 +23,7 @@ namespace CreatureCare.Repositories
                 {
                     cmd.CommandText = @"
                          SELECT  a.Id 'AId', a.CreatureId, c.Name 'CName', a.UserProfileDocId 'DocId', up.FullName 'DocName', up.Telephone, up.Email, 
-                            a.DateRequested, a.AmountDue, a.DateDue, a.PaidAmount, a.InvoiceSentOnDate
+                            up.ImageLocation, a.DateRequested, a.AmountDue, a.DateDue, a.PaidAmount, a.InvoiceSentOnDate
                         FROM Appointment a
                         LEFT JOIN UserProfile up ON up.Id = a.UserProfileDocId
                         LEFT JOIN Creature c ON c.Id = a.CreatureId;   
@@ -51,6 +51,7 @@ namespace CreatureCare.Repositories
                                 FullName = DbUtils.GetString(reader, "DocName"),
                                 Email = DbUtils.GetString(reader, "Email"),
                                 Telephone = DbUtils.GetString(reader, "Telephone"),
+                                ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                             },
                             Creature = new Creature()
                             {

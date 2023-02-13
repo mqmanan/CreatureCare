@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../modules/authManager";
 
@@ -17,32 +16,40 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit}>
-            <fieldset>
-                <FormGroup>
-                    <Label for="email">Email</Label>
-                    <Input
+        <>
+            <div>
+                <fieldset>
+                    <div className="email">Email</div>
+                    <input
                         id="email"
                         type="text"
                         autoFocus
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input
+                </fieldset>
+
+                <fieldset>
+                    <div className="password">Password</div>
+                    <input
                         id="password"
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </FormGroup>
-                <FormGroup>
-                    <Button>Login</Button>
-                </FormGroup>
-                <em>
+                </fieldset>
+
+
+                <button className="login-button"
+                    type="submit"
+                    onClick={(event) => { loginSubmit(event) }}
+                >
+                    Login
+                </button>
+
+                <div>
                     Not registered? <Link to="register">Register</Link>
-                </em>
-            </fieldset>
-        </Form>
+                </div>
+            </div>
+
+        </>
     );
 }

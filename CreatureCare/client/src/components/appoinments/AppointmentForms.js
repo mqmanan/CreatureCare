@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, FormGroup, Label, Input } from "reactstrap";
 import { addCreature } from "../../modules/creatureManager";
 import { getAllUserProfiles } from "../../modules/userProfileManager";
 
-export default function AddAppointment() {
+const AppointmentCard = () => {
     const navigate = useNavigate();
 
     // initial state of object or array will be empty
@@ -167,3 +166,6 @@ export default function AddAppointment() {
         </>
     );
 }
+
+
+// export default AppointmentForm;

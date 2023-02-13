@@ -1,18 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink as RRNavLink } from "react-router-dom";
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from 'reactstrap';
 import { logout } from '../../modules/authManager';
 
 export default function Header({ isLoggedIn }) {
@@ -31,7 +18,6 @@ export default function Header({ isLoggedIn }) {
                             <NavItem>
                                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
                             </NavItem>
-
                         }
                     </Nav>
 
