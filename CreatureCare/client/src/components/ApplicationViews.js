@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Hello from "./homeNavBar/Hello";
-import CreatureList from "./creatures/CreatureList";
-import EditCreature from "./creatures/EditCreature";
-import AddCreature from "./creatures/AddCreature";
-import CreatureDetails from "./creatures/CreatureDetails";
+import PatientList from "./creatures/PatientList";
+import AddPatientForm from "./creatures/AddPatientForm";
+import EditPatientForm from "./creatures/EditPatientForm";
+import PatientDetails from "./creatures/PatientDetails";
 import AppointmentList from "./appoinments/AppointmentList";
-
+import AppointmentDateTime from "./appoinments/AppointmentDateTime";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -20,27 +20,33 @@ export default function ApplicationViews({ isLoggedIn }) {
                         index
                         element={isLoggedIn ? <Hello /> : <Navigate to="/login" />} />
 
-                    <Route path="patients" element={<CreatureList />} />
+                    {/* <Route path="staff" element={<Hello />} /> */}
 
-                    <Route path="patients/add" element={<AddCreature />} />
+                    <Route path="patients" element={<PatientList />} />
 
-                    <Route path="patients/:id" element={<CreatureDetails />} />
+                    <Route path="patients/add" element={<AddPatientForm />} />
 
-                    <Route path="patients/:id/edit" element={<EditCreature />} />
+                    <Route path="patients/:id" element={<PatientDetails />} />
+
+                    <Route path="patients/:id/edit" element={<EditPatientForm />} />
 
                     <Route path="appointments" element={<AppointmentList />} />
 
-                    <Route path="appointments/add" element={<AddCreature />} />
+                    <Route path="appointments/add" element={<AppointmentDateTime />} />
+
+                    {/* <Route path="profile" element={<PatientList />} />
+
+                    <Route path="profile/details" element={<PatientList />} /> */}
 
                     <Route path="login" element={<Login />} />
 
-                    <Route path="register" element={<Register />} />
+                    {/* <Route path="register" element={<Register />} /> */}
 
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
 
                 </Route>
             </Routes>
-        </main>
+        </main >
     );
 };
 

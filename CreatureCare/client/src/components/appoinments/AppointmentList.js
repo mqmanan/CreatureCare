@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import AppointmentCard from "./AppointmentCard";
 import { getAllAppointments } from "../../modules/appointmentManager";
+import { Container, Grid, Typography } from "@mui/material";
 
 const AppointmentList = () => {
     const navigate = useNavigate();
@@ -14,19 +14,26 @@ const AppointmentList = () => {
     }, []);
 
     return (
-        <>
+        <Container maxWidth="xl">
 
-            <Button onClick={() => { navigate("/appointments/add") }}>Add</Button>
+            <Typography variant="h3" align="center" pb={1}>
+                Appointment Tracker
+            </Typography>
 
-            <div className="container">
-                <div className="row justify-content-center">
-                    {appointments.map((appointment) => (
-                        <AppointmentCard appointment={appointment} key={appointment.id} />
-                    ))}
-                </div>
-            </div>
-
-        </>
+            <Grid
+                container
+                alignItems="center"
+                justifyContent="space-evenly"
+                spacing="30"
+                p={7}
+            >
+                {appointments.map((appoinment) => (
+                    <Grid item key={appoinment.id} xs={12} md={6} lg={3}>
+                        <AppointmentCard appointment={appoinment} />
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
     );
 }
 

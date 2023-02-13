@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import { Spinner } from 'reactstrap';
-import Header from "./components/homeNavBar/Header";
 import ApplicationViews from "./components/ApplicationViews";
+import NavBar from './components/homeNavBar/NavBar';
 import { onLoginStatusChange } from "./modules/authManager";
 
 
@@ -13,13 +12,9 @@ function App() {
     onLoginStatusChange(setIsLoggedIn);
   }, []);
 
-  if (isLoggedIn === null) {
-    return <Spinner className="app-spinner dark" />;
-  }
-
   return (
     <Router>
-      <Header isLoggedIn={isLoggedIn} />
+      <NavBar isLoggedIn={isLoggedIn} />
       <ApplicationViews isLoggedIn={isLoggedIn} />
     </Router>
   );
