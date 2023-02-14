@@ -42,7 +42,7 @@ export default function NavBar({ isLoggedIn }) {
                 </Typography>
 
                 {isLoggedIn &&
-                    <Stack direction='row' spacing={2}>
+                    <Stack direction='row' spacing={1}>
                         <Button
                             tag={RRNavLink}
                             color='inherit'
@@ -93,7 +93,7 @@ export default function NavBar({ isLoggedIn }) {
                             tag={RRNavLink}
                             color='inherit'
                             onClick={() => { navigate("/appointments/add") }}>
-                            Book Appointment
+                            Schedule
                         </Button>
                         <Button
                             tag={RRNavLink}
@@ -108,7 +108,7 @@ export default function NavBar({ isLoggedIn }) {
                             startIcon={<LogoutIcon />}
                             onClick={(event) => {
                                 logout(event)
-                                navigate("/")
+                                navigate("/login")
                             }}
                         >
                             Logout

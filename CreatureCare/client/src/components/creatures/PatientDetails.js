@@ -7,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { creatureRemove, getCreatureById } from '../../modules/creatureManager';
-import { Container, Grid, Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FolderSharedIcon from '@mui/icons-material/FolderShared';
 
 export default function PatientDetails() {
     const navigate = useNavigate();
@@ -32,52 +34,84 @@ export default function PatientDetails() {
     return (
         <Grid
             item
-            xs={12}
+            xs={6}
             display="flex"
             justifyContent="center"
             alignItems="center"
         >
-            <Card sx={{ maxWidth: 300 }}>
-                <CardMedia
+            <Stack direction="row" spacing={5}>
+                <Card
                     sx={{
-                        height: 300,
-                        '--Grid-borderWidth': '2px',
-                        borderTop: 'var(--Grid-borderWidth) solid',
-                        borderLeft: 'var(--Grid-borderWidth) solid',
-                        borderColor: 'divider',
-                    }}
-                    image={creature.imageLocation}
-                    title={creature.name}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
-                        <center>{creature.name}</center>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        <center>Associated with -- {creature?.userProfile?.fullName}</center>
-                    </Typography>
-                </CardContent>
-                <CardActions>
+                        maxWidth: 300,
+                        boxShadow: 3
+                    }}>
+                    <CardMedia
+                        sx={{
+                            height: 300,
+                            '--Grid-borderWidth': '2px',
+                            borderTop: 'var(--Grid-borderWidth) solid',
+                            borderColor: 'divider',
+                        }}
+                        image={creature.imageLocation}
+                        title={creature.name}
+                        component='div'
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h4" component="div">
+                            <center>{creature.name}</center>
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" px={3} py={1}>
+                            <b>Type</b>: {creature.type}<br></br>
+                            <b>Origin</b>: {creature.origin}<br></br>
+                            <b>Gender</b>: {creature.gender}<br></br>
+                            <b>DOB</b>: {creature.birthdate}<br></br><br></br>
 
-                    <Stack direction="row" spacing={2}>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            size="medium"
-                            onClick={() => { navigate("/patients") }}>
-                            Catalog</Button>
+                            <b>Owner</b>: {creature?.userProfile?.fullName}<br></br>
+                            <b>Phone</b>: {creature?.userProfile?.telephone}<br></br>
+                            <b>Email</b>: {creature?.userProfile?.email}<br></br>
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
 
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            size="medium"
-                            onClick={handleDeleteButton}>
-                            Delete
-                        </Button>
-                    </Stack>
+                        <Stack direction="row" spacing={1} pb={1}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="medium"
+                                endIcon={<FolderSharedIcon />}
+                                onClick={() => { navigate("/patients") }}>
+                                Records
+                            </Button>
 
-                </CardActions>
-            </Card>
-        </Grid>
+                            <Button
+                                variant="contained"
+                                color="error"
+                                size="medium"
+                                endIcon={<DeleteForeverIcon />}
+                                onClick={handleDeleteButton}>
+                                Delete
+                            </Button>
+                        </Stack>
+
+                    </CardActions>
+                </Card>
+
+                <Card
+                    sx={{
+                        maxWidth: 600,
+                        height: 600,
+                        boxShadow: 3,
+                        p: 5
+                    }}>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            <center>Associated Doctors</center>
+                        </Typography>
+
+                    </CardContent>
+                </Card>
+            </Stack>
+        </Grid >
     );
+
 };

@@ -80,7 +80,7 @@ export default function MaterialUIPickers() {
                 </Stack>
             </LocalizationProvider>
 
-            <Stack direction="row" spacing={2} mt={3}>
+            <Stack direction="row" spacing={1} mt={3}>
 
                 <Button
                     variant="contained"

@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
-import { shadows } from '@mui/system';
 
 export default function PatientCard({ creature }) {
     const navigate = useNavigate();
@@ -25,6 +24,7 @@ export default function PatientCard({ creature }) {
                     }}
                     image={creature.imageLocation}
                     title="creature image"
+                    component='div'
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h4" component="div">

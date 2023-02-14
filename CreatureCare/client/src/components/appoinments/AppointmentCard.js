@@ -19,6 +19,7 @@ const AppointmentCard = ({ appointment }) => {
                 sx={{ height: 200 }}
                 image={appointment?.userProfile?.imageLocation}
                 title={appointment?.userProfile?.fullName}
+                component='div'
             />
             <CardContent>
                 <Typography gutterBottom variant="h4" component="div">
@@ -42,18 +43,4 @@ const AppointmentCard = ({ appointment }) => {
 };
 
 export default AppointmentCard;
-
-{/* <Grid item xs={12} sm={6} md={3}>
-<Card
-    sx={{ maxWidth: 345 }}
-    columns={3}
->
-    <CardHeader
-        action={
-            <IconButton>
-                <AccountBoxIcon />
-            </IconButton>
-        }
-        title={appoint} */}
-
 

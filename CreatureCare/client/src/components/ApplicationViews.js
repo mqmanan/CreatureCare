@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./auth/Login";
-import Register from "./auth/Register";
 import Hello from "./homeNavBar/Hello";
 import PatientList from "./creatures/PatientList";
 import AddPatientForm from "./creatures/AddPatientForm";
