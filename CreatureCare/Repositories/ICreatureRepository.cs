@@ -10,6 +10,7 @@ namespace CreatureCare.Repositories
         void Update(Creature creature);
         Creature GetById(int id);
         Creature GetOneCreature(int id);
+        Appointment GetCreatureWithDoctors(int id);
         void Deactivate(int id);
     }
 }

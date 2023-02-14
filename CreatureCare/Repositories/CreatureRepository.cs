@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure;
 using CreatureCare.Models;
 using CreatureCare.Utils;
@@ -43,7 +44,7 @@ namespace CreatureCare.Repositories
                             Birthdate = DbUtils.GetString(reader, "Birthdate"),
                             ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                             Description = DbUtils.GetString(reader, "Description"),
-                            UserProfile = new UserProfile()
+                            User = new UserProfile()
                             {
                                 Id = DbUtils.GetInt(reader, "UPId"),
                                 FullName = DbUtils.GetString(reader, "FullName"),
@@ -154,7 +155,7 @@ namespace CreatureCare.Repositories
                                 ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
-                                UserProfile = new UserProfile()
+                                User = new UserProfile()
                                 {
                                     Id = DbUtils.GetInt(reader, "UPId"),
                                     FullName = DbUtils.GetString(reader, "FullName"),
@@ -212,6 +213,125 @@ namespace CreatureCare.Repositories
             }
         }
 
+        public Appointment GetCreatureWithDoctors(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Distinct up.fullName, c.Name, c.Id
+                        FROM Appointment a
+                        LEFT JOIN UserProfile up ON a.UserProfileDocId = up.Id
+                        LEFT JOIN Creature c ON a.CreatureId = c.Id
+                        WHERE c.Id = @id
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // reads thru columns of data table
+                    {
+
+                        Appointment appointment = null;
+                        while (reader.Read()) //reads thru rows of data table and pulls out different data
+                        {
+                            if (appointment == null)
+                            {
+                                appointment = new Appointment()
+                                {
+                                    Id = id,
+                                    Creature = new Creature()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "Id"),
+                                        Name = DbUtils.GetString(reader, "Name"),
+                                    },
+                                    UserProfiles = new List<UserProfile>()
+                                };
+                            }
+
+                            if (DbUtils.IsNotDbNull(reader, "Id")) // pull out userProfile data
+                            {
+                                appointment.UserProfiles.Add(new UserProfile()
+                                {
+                                    FullName = DbUtils.GetString(reader, "FullName"),
+                                });
+                            }
+                        }
+
+                        return appointment;
+                    }
+                }
+            }
+        }
+
+        //public List<Appointment> GetCreatureWithAssociatedDoctors()
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                SELECT DISTINCT a.CreatureId, a.UserProfileDocId, up.Id, up.fullName, c.Name
+        //                FROM Appointment a
+        //                LEFT JOIN UserProfile up ON a.UserProfileDocId = up.Id
+        //                LEFT JOIN Creature c ON a.CreatureId = c.Id
+        //                WHERE c.Id=1 // EDIT THIS
+        //            ";
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+
+        //                var appointments = new List<Appointment>();
+        //                while (reader.Read())
+        //                {
+        //                    var appointmentId = DbUtils.GetInt(reader, "appointmentId");
+
+        //                    var existingAppointment = appointments.FirstOrDefault(a => a.Id == appointmentId);
+        //                    if (existingAppointment == null)
+        //                    {
+        //                        existingVideo = new Video()
+        //                        {
+        //                            Id = videoId,
+        //                            Title = DbUtils.GetString(reader, "Title"),
+        //                            Description = DbUtils.GetString(reader, "Description"),
+        //                            DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
+        //                            Url = DbUtils.GetString(reader, "Url"),
+        //                            UserProfileId = DbUtils.GetInt(reader, "VideoUserProfileId"),
+        //                            UserProfile = new UserProfile()
+        //                            {
+        //                                Id = DbUtils.GetInt(reader, "VideoUserProfileId"),
+        //                                Name = DbUtils.GetString(reader, "Name"),
+        //                                Email = DbUtils.GetString(reader, "Email"),
+        //                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+        //                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+        //                            },
+        //                            Comments = new List<Comment>()
+        //                        };
+
+        //                        videos.Add(existingVideo);
+        //                    }
+
+        //                    if (DbUtils.IsNotDbNull(reader, "CommentId"))
+        //                    {
+        //                        existingVideo.Comments.Add(new Comment()
+        //                        {
+        //                            Id = DbUtils.GetInt(reader, "CommentId"),
+        //                            Message = DbUtils.GetString(reader, "Message"),
+        //                            VideoId = videoId,
+        //                            UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId")
+        //                        });
+        //                    }
+        //                }
+
+        //                return videos;
+        //            }
+        //        }
+        //    }
+        //}
+
+
         public void Deactivate(int id)
         {
             using (var conn = Connection)
@@ -226,7 +346,7 @@ namespace CreatureCare.Repositories
                     ";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
-                    
+
                     cmd.ExecuteNonQuery();
 
                 }
@@ -234,4 +354,3 @@ namespace CreatureCare.Repositories
         }
     }
 }
-

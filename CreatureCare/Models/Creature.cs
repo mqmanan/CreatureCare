@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CreatureCare.Models
@@ -29,7 +30,9 @@ namespace CreatureCare.Models
         public bool IsActive { get; set; }
 
         public int UserProfileId { get; set; }
+        public UserProfile User { get; set; }
+        public List<UserProfile> UserProfiles { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        public Appointment Appointment { get; set; }
     }
 }

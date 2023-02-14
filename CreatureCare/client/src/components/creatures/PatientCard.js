@@ -31,7 +31,7 @@ export default function PatientCard({ creature }) {
                         {creature.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        <b>Human companion</b>:  {creature?.userProfile?.fullName}
+                        <b>Human companion</b>:  {creature?.user?.fullName}
                     </Typography>
                 </CardContent>
                 <CardActions>

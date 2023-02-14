@@ -45,7 +45,7 @@ namespace CreatureCare.Repositories
                             DateDue = DbUtils.GetString(reader, "DateDue"),
                             PaidAmount = DbUtils.GetNullableInt(reader, "PaidAmount"),
                             InvoiceSentOnDate = DbUtils.GetString(reader, "InvoiceSentOnDate"),
-                            UserProfile = new UserProfile()
+                            User = new UserProfile()
                             {
                                 Id = DbUtils.GetInt(reader, "DocId"),
                                 FullName = DbUtils.GetString(reader, "DocName"),
