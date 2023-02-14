@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AppointmentCard from "./AppointmentCard";
 import { getAllAppointments } from "../../modules/appointmentManager";
 import { Container, Grid, Typography } from "@mui/material";
 
 const AppointmentList = () => {
-    const navigate = useNavigate();
     const [appointments, setAppointments] = useState([]);
 
     // will render appointments array that will be mapped over

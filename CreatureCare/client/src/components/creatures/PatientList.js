@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getAllCreatures } from "../../modules/creatureManager";
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import PatientCard from "./PatientCard";
 import { Container, Typography } from "@mui/material";
 
 export default function PatientList() {
-    const navigate = useNavigate();
     const [creatures, setCreatures] = useState([]);
 
     // will render the creatures array that will be mapped over
