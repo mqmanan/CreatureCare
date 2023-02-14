@@ -20,13 +20,15 @@ const AppointmentList = () => {
 
             <Grid
                 container
+                spacing={5}
+                columns={{ xs: 4, sm: 8, md: 12 }}
                 alignItems="center"
                 justifyContent="space-evenly"
-                spacing="30"
-                p={7}
+                px={30}
+                py={5}
             >
                 {appointments.map((appoinment) => (
-                    <Grid item key={appoinment.id} xs={12} md={6} lg={3}>
+                    <Grid item key={appoinment.id} xs={12} md={4} lg={1}>
                         <AppointmentCard appointment={appoinment} />
                     </Grid>
                 ))}

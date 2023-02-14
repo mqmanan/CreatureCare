@@ -12,30 +12,36 @@ const AppointmentCard = ({ appointment }) => {
 
     return (
         <Card
-            sx={{ maxWidth: 330, boxShadow: 3 }}
-            columns={3}
+            sx={{
+                maxWidth: 240, boxShadow: 3
+            }}
         >
             <CardMedia
-                sx={{ height: 200 }}
-                image={appointment?.userProfile?.imageLocation}
-                title={appointment?.userProfile?.fullName}
+                sx={{ height: 250 }}
+                image={appointment?.user?.imageLocation}
+                title={appointment?.user?.fullName}
                 component='div'
             />
-            <CardContent>
-                <Typography gutterBottom variant="h4" component="div">
-                    {appointment?.userProfile?.fullName}
+            <CardContent alignItems="center">
+                <Typography gutterBottom variant="h5" component="div">
+                    <b>{appointment?.user?.fullName}</b>
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     <b>Patient</b>:  {appointment?.creature?.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    <b>Date</b>: {appointment.dateRequested}
+                    <b>Appointment</b>: {appointment.dateRequested}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions display="flex" justifyContent="center">
                 <Button
                     size="small"
-                    onClick={() => { navigate(`/patients/${appointment.id}`) }}>
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center"
+                    }}
+                    onClick={() => { navigate(`/appointments/${appointment.id}`) }}>
                     See Details</Button>
             </CardActions>
         </Card>

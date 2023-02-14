@@ -63,6 +63,25 @@ export const getCreature = (id) => {
     });
 };
 
+export const getCreatureDoctors = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/CreatureWithDoctors/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(
+                    "An error appeared while loading section for associsated doctors!",
+                );
+            }
+        });
+    });
+};
+
 export const addCreature = (creature) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {

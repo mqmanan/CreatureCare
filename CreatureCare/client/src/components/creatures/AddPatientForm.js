@@ -176,7 +176,7 @@ export default function AddPatientForm() {
                         sx={{ mb: 2 }}
                     />
 
-                    <Stack direction="row" spacing={2}>
+                    <Stack direction="row" spacing={2} pb={2}>
                         <Button
                             variant="contained"
                             color="primary"

@@ -21,6 +21,8 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     {/* <Route path="staff" element={<Hello />} /> */}
 
+                    {/* <Route path="staff/:staffId" element={<Hello />} /> */}
+
                     <Route path="patients" element={<PatientList />} />
 
                     <Route path="patients/add" element={<AddPatientForm />} />

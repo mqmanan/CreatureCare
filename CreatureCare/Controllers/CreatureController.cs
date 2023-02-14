@@ -15,13 +15,16 @@ namespace CreatureCare.Controllers
     {
         private readonly ICreatureRepository _creatureRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
 
         public CreatureController(
             ICreatureRepository creatureRepository,
-            IUserProfileRepository userProfileRepository)
+            IUserProfileRepository userProfileRepository,
+            IAppointmentRepository appointmentRepository)
         {
             _creatureRepository = creatureRepository;
             _userProfileRepository = userProfileRepository;
+            _appointmentRepository = appointmentRepository;
         }
 
         // GET: api/<CreatureController>
@@ -34,6 +37,7 @@ namespace CreatureCare.Controllers
             //    return Unauthorized();
             //}
             //creature.UserProfileId = currentUserProfile.Id;
+
             return Ok(_creatureRepository.GetAll());
         }
 
@@ -57,6 +61,13 @@ namespace CreatureCare.Controllers
                 return NotFound();
             }
             return Ok(creature);
+        }
+
+        [HttpGet("CreatureWithDoctors/{id}")]
+        public IActionResult GetCreatureDoctors(int id)
+        {
+            var doctors = _creatureRepository.GetCreatureWithDoctors(id);
+            return Ok(doctors);
         }
 
         // POST: new creature info
