@@ -1,6 +1,5 @@
 import {
-    Grid, TextField, Select, FormControl, RadioGroup, FormControlLabel,
-    Radio, FormLabel, Stack, OutlinedInput, MenuItem, Menu, Typography
+    Grid, TextField, Select, FormControl, Stack, MenuItem, Typography, InputLabel
 } from "@mui/material";
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from "react";
@@ -81,7 +80,7 @@ export default function EditPatientForm() {
 
         <Form>
             <Typography variant="h3" align="center" pb={2}>
-                New Patient Form
+                Edit Patient Details
             </Typography>
             <Grid
                 container
@@ -152,34 +151,6 @@ export default function EditPatientForm() {
                         sx={{ mb: 2 }}
                     />
 
-                    <FormControl variant="outlined">
-                        <TextField
-                            id="UserProfileId"
-                            select
-                            sx={{ mb: 2 }}
-                            style={{ width: 300 }}
-                            label="Owner"
-                            defaultValue="Owner"
-                            value={userChoices.userProfileId}
-                            onChange={(event) => {
-                                const copy = { ...userChoices }
-                                copy.userProfileId = parseInt(event.target.value)
-                                setUserChoices(copy)
-                            }}
-                        >
-                            <MenuItem value="0"><em>Owner</em></MenuItem>
-
-                            {users.map((user) => (
-                                <MenuItem
-                                    key={user.id}
-                                    value={user.id}
-                                >
-                                    {user.fullName}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </FormControl>
-
                     <TextField
                         fullWidth
                         id="description"
@@ -209,7 +180,7 @@ export default function EditPatientForm() {
                             size="medium"
                             startIcon={<SaveIcon />}
                             onClick={handleSaveButtonClick}>
-                            Update
+                            Save
                         </Button>
 
                         <Button

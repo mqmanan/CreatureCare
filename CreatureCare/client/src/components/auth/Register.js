@@ -1,14 +1,14 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../modules/authManager";
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-export default function Registr() {
+export default function Register() {
     const navigate = useNavigate();
 
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
+    const [fullName, setFullName] = useState();
     const [email, setEmail] = useState();
-    const [imageLocation, setImageLocation] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
 
@@ -18,88 +18,90 @@ export default function Registr() {
             alert("Passwords don't match. Do better.");
         } else {
             const userProfile = {
-                firstName,
-                lastName,
-                imageLocation,
+                fullName,
                 email,
             };
-            register(userProfile, password).then(() => navigate("/"));
+            register(userProfile, password)
+                .then(() => navigate("/"))
+                .catch(() => alert("Please fill out the entire form!"));
         }
     };
 
     return (
-        <div >
-            <fieldset>
-                <div className="firstName">First Name</div>
-                <input
-                    id="firstName"
-                    type="text"
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-            </fieldset>
+        <>
+            <form>
+                <Box
+                    display="flex"
+                    flexDirection={"column"}
+                    maxWidth={400}
+                    alignitems="center"
+                    justifyContent={'center'}
+                    margin="auto"
+                    padding={3}
+                    borderRadius={5}
+                    boxShadow={"5px 5px 10px #ccc"}
+                    sx={{
+                        ":hover": {
+                            boxShadow: "10px 10px 20px #ccc",
+                        },
+                    }}
 
-            <fieldset>
-                <div className="lastName">Last Name</div>
-                <input
-                    id="lastName"
-                    type="text"
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-            </fieldset>
+                >
+                    <Typography variant="h4" padding={1} textAlign="center">
+                        <b>Register</b>
+                    </Typography>
 
-            <fieldset>
-                <div className="email">Email</div>
-                <input
-                    id="email"
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </fieldset>
+                    <TextField
+                        margin="dense"
+                        type={'fullName'}
+                        variant="outlined"
+                        placeholder="Full Name"
+                        onChange={(e) => setFullName(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        type={'email'}
+                        variant="outlined"
+                        placeholder="Email"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
 
-            <fieldset>
-                <div className="imageLocation">Profile Image URL</div>
-                <input
-                    id="imageLocation"
-                    type="text"
-                    onChange={(e) => setImageLocation(e.target.value)}
-                />
-            </fieldset>
+                    <TextField
+                        margin="dense"
+                        type={'password'}
+                        variant="outlined"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
 
-            <fieldset>
-                <div className="password">Password</div>
-                <input
-                    id="password"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </fieldset>
+                    <TextField
+                        margin="dense"
+                        type={'confirmPassword'}
+                        variant="outlined"
+                        placeholder="Confirm Password"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
 
-            <fieldset>
-                <div className="confirmPassword">Confirm Password</div>
-                <input
-                    id="confirmPassword"
-                    type="password"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-            </fieldset>
+                    <Button
+                        variant="contained"
+                        color="warning"
+                        size="small"
+                        sx={{ marginTop: 2, borderRadius: 3 }}
+                        endIcon={<VpnKeyIcon />}
+                        onClick={(event) => { registerClick(event) }}
+                    >
+                        Register
+                    </Button>
 
-            <fieldset>
-                <div className="password">Password</div>
-                <input
-                    id="password"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </fieldset>
+                    <Button
+                        sx={{ marginTop: 2, borderRadius: 3 }}
+                        onClick={() => { navigate(`/login`) }}
+                    >
+                        Login
+                    </Button>
 
-
-            <button className="login-button"
-                type="submit"
-                onClick={(event) => { registerClick(event) }}
-            >
-                Register
-            </button>
-
-        </div>
+                </Box>
+            </form>
+        </>
     );
 }

@@ -31,13 +31,11 @@ namespace CreatureCare.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //if (currentUserProfile.UserType.Name != "User")
-            //{
-            //    return Unauthorized();
-            //}
-            //creature.UserProfileId = currentUserProfile.Id;
-
+            var currentUserProfile = GetCurrentUserProfile();
+            if (currentUserProfile.UserType.Name != "Doctor")
+            {
+                return Unauthorized();
+            }
             return Ok(_creatureRepository.GetAll());
         }
 
@@ -74,10 +72,10 @@ namespace CreatureCare.Controllers
         [HttpPost]
         public IActionResult Post(Creature creature)
         {
-            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
-            var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            // var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
+            // var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
 
-           creature.UserProfileId = user.Id;
+           // creature.UserProfileId = user.Id;
 
             _creatureRepository.Add(creature);
 

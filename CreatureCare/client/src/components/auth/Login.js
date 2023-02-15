@@ -1,10 +1,13 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../modules/authManager";
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 export default function Login() {
     const navigate = useNavigate();
 
+    // variables are initially rendered as empty states
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -12,44 +15,68 @@ export default function Login() {
         e.preventDefault();
         login(email, password)
             .then(() => navigate("/"))
-            .catch(() => alert("Invalid email or password"));
+            .catch(() => alert("Invalid email or password!"));
     };
 
     return (
         <>
-            <div>
-                <fieldset>
-                    <div className="email">Email</div>
-                    <input
-                        id="email"
-                        type="text"
-                        autoFocus
+            <form>
+                <Box
+                    display="flex"
+                    flexDirection={"column"}
+                    maxWidth={400}
+                    alignitems="center"
+                    justifyContent={'center'}
+                    margin="auto"
+                    padding={3}
+                    borderRadius={5}
+                    boxShadow={"5px 5px 10px #ccc"}
+                    sx={{
+                        ":hover": {
+                            boxShadow: "10px 10px 20px #ccc",
+                        },
+                    }}
+
+                >
+                    <Typography variant="h3" padding={2} textAlign="center">
+                        Login
+                    </Typography>
+
+                    <TextField
+                        margin="dense"
+                        type={'email'}
+                        variant="outlined"
+                        placeholder="Email"
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                </fieldset>
-
-                <fieldset>
-                    <div className="password">Password</div>
-                    <input
-                        id="password"
-                        type="password"
+                    <TextField
+                        margin="dense"
+                        type={'password'}
+                        variant="outlined"
+                        placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </fieldset>
 
+                    <Button
+                        variant="contained"
+                        color="warning"
+                        size="small"
+                        sx={{ marginTop: 2, borderRadius: 3 }}
+                        endIcon={<VpnKeyIcon />}
+                        onClick={(event) => { loginSubmit(event) }}
+                    >
+                        Login
+                    </Button>
 
-                <button className="login-button"
-                    type="submit"
-                    onClick={(event) => { loginSubmit(event) }}
-                >
-                    Login
-                </button>
+                    <Button
+                        sx={{ marginTop: 2, borderRadius: 3 }}
+                        onClick={() => { navigate(`/register`) }}
+                    >
+                        Need to Register?
+                    </Button>
 
-                <div>
-                    Not registered? <Link to="register">Register</Link>
-                </div>
-            </div>
-
+                </Box>
+            </form>
         </>
     );
 }

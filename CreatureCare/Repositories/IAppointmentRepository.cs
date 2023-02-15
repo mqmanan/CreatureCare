@@ -7,6 +7,8 @@ namespace CreatureCare.Repositories
     {
         List<Appointment> GetAll();
         void Add(Appointment appointment);
+        List<Appointment> Search(string criterion, bool sortDescending);
+
 
     }
 }

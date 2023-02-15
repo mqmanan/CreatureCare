@@ -31,13 +31,19 @@ namespace CreatureCare.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //if (currentUserProfile.UserType.Name != "User")
-            //{
-            //    return Unauthorized();
-            //}
-            //creature.UserProfileId = currentUserProfile.Id;
+            var currentUserProfile = GetCurrentUserProfile();
+            if (currentUserProfile.UserType.Name != "Doctor")
+            {
+                return Unauthorized();
+            }
+
             return Ok(_appointmentRepository.GetAll());
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q, bool sortDesc)
+        {
+            return Ok(_appointmentRepository.Search(q, sortDesc));
         }
 
         //[HttpGet("{id}")]
@@ -99,10 +105,10 @@ namespace CreatureCare.Controllers
         //    return Ok();
         //}
 
-        //private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
-        //}
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }
