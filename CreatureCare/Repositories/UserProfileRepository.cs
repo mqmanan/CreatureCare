@@ -18,8 +18,10 @@ namespace CreatureCare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT  Id, FirebaseUserId, FullName, Email, Address, Telephone, UserTypeId, SpecialtyId 
-                        FROM UserProfile
+                        SELECT  up.Id 'UserId', up.FirebaseUserId, up.FullName,up.Email, up.Address, up.Telephone, up.ImageLocation, 
+                            up.UserTypeId, ut.Id 'TypeId', up.DateCreated, ut.Name
+                        FROM UserProfile up
+                        LEFT JOIN UserType ut ON up.UserTypeId = ut.Id
                         WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -31,20 +33,23 @@ namespace CreatureCare.Repositories
                     {
                         userProfile = new UserProfile()
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
+                            Id = DbUtils.GetInt(reader, "UserId"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             FullName = DbUtils.GetString(reader, "FullName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             Address = DbUtils.GetString(reader, "Address"),
                             Telephone = DbUtils.GetString(reader, "Telephone"),
+                            ImageLocation= DbUtils.GetString(reader, "ImageLocation"),
+                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
                             UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            //UserType = new UserType()
-                            //{
-                            //    Id = DbUtils.GetInt(reader, "UserTypeId"),
-                            //    Name = DbUtils.GetString(reader, "UserTypeName"),
-                            //}
+                            UserType = new UserType()
+                            {
+                                Id = DbUtils.GetInt(reader, "TypeId"),
+                                Name = DbUtils.GetString(reader, "Name")
+                            }
                         };
                     }
+
                     reader.Close();
 
                     return userProfile;
@@ -131,6 +136,52 @@ namespace CreatureCare.Repositories
                     reader.Close();
 
                     return userProfile;
+                }
+            }
+        }
+
+        public List<UserProfile> GetAllAdmin()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id 'UserId', up.FullName, up.Email, up.Address, up.Telephone, up.ImageLocation, up.DateCreated, up.UserTypeId 'TypeId'
+                        FROM UserProfile up
+                        LEFT JOIN Specialty s ON up.SpecialtyId = s.Id
+                        WHERE up.UserTypeId = 1
+                        ORDER BY up.FullName
+                    ";
+
+                    List<UserProfile> profiles = new List<UserProfile>();
+
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        UserProfile profile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "UserId"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            FullName = DbUtils.GetString(reader, "FirstName"),
+                            Email = DbUtils.GetString(reader, "DisplayName"),
+                            Address = DbUtils.GetString(reader, "Email"),
+                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            UserType = new UserType()
+                            {
+                                Id = DbUtils.GetInt(reader, "TypeId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                            }
+                        };
+                               
+                        profiles.Add(profile);
+                    }
+                    reader.Close();
+
+                    return profiles;
                 }
             }
         }

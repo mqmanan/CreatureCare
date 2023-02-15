@@ -1,4 +1,5 @@
-﻿using CreatureCare.Models;
+﻿using System.Security.Claims;
+using CreatureCare.Models;
 using CreatureCare.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +39,26 @@ namespace CreatureCare.Controllers
             return Ok();
         }
 
-        [HttpGet ("GetAllUsers")]
-        public IActionResult GetAllUsers()
+        [HttpGet("Me")]
+        public IActionResult Me()
+        {
+            var userProfile = GetCurrentUserProfile();
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userProfile);
+        }
+
+        [HttpGet ("GetStaff")]
+        public IActionResult GetAllAdmin()
+        {
+            return Ok(_userProfileRepository.GetAllAdmin());
+        }
+
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAll()
         {
             return Ok(_userProfileRepository.GetAll());
         }
@@ -58,6 +77,12 @@ namespace CreatureCare.Controllers
         public IActionResult GetUserByIdWithUserType(int id)
         {
             return Ok(_userProfileRepository.GetUserByIdWithUserType(id));
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
 
     }

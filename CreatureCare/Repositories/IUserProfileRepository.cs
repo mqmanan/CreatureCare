@@ -9,6 +9,7 @@ namespace CreatureCare.Repositories
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         void Add(UserProfile userProfile);
         UserProfile GetUserByIdWithUserType(int id);
+        List<UserProfile> GetAllAdmin();
         List<UserProfile> GetAll();
     }
 }

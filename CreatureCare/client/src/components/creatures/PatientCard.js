@@ -13,7 +13,7 @@ export default function PatientCard({ creature }) {
     return (
         <div>
             <Card
-                sx={{ maxWidth: 345, boxShadow: 3 }}
+                sx={{ maxWidth: 315, boxShadow: 3 }}
             >
                 <CardMedia
                     sx={{
@@ -31,7 +31,7 @@ export default function PatientCard({ creature }) {
                         {creature.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        <b>Human companion</b>:  {creature?.user?.fullName}
+                        <b>Human compadre</b>:  {creature?.user?.fullName}
                     </Typography>
                 </CardContent>
                 <CardActions>

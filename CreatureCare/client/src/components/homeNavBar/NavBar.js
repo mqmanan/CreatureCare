@@ -9,7 +9,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from "react-router-dom";
 import { logout } from '../../modules/authManager';
 
-export default function NavBar({ isLoggedIn }) {
+export default function NavBar({ isLoggedIn, userProfile }) {
     const navigate = useNavigate();
 
     // state for dropdown menu
@@ -102,6 +102,7 @@ export default function NavBar({ isLoggedIn }) {
                             onClick={() => { navigate("/profile") }}>
                             Profile
                         </Button>
+
                         <Button
                             tag={RRNavLink}
                             color='inherit'

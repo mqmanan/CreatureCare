@@ -17,7 +17,7 @@ const AppointmentCard = ({ appointment }) => {
             }}
         >
             <CardMedia
-                sx={{ height: 250 }}
+                sx={{ height: 200 }}
                 image={appointment?.user?.imageLocation}
                 title={appointment?.user?.fullName}
                 component='div'

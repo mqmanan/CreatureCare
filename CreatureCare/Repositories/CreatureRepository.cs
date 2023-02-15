@@ -26,7 +26,8 @@ namespace CreatureCare.Repositories
                         SELECT c.Id 'CreatureId', c.UserProfileId 'UPId', c.Name, c.Type, c.Origin, c.Gender, c.Birthdate, UserProfile.FullName, UserProfile.Email, UserProfile.Telephone, c.ImageLocation, c.Description
                         FROM Creature c
                         JOIN UserProfile ON UserProfile.Id = c.UserProfileId
-                        WHERE IsActive = 1;";
+                        WHERE IsActive = 1
+                        ORDER BY C.Name;";
 
                     var reader = cmd.ExecuteReader();
 

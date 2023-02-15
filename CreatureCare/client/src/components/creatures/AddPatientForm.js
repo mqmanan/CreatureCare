@@ -1,5 +1,5 @@
 import {
-    Grid, TextField, FormControl, MenuItem, Stack, Typography
+    Grid, TextField, FormControl, MenuItem, Stack, Typography, Select
 } from "@mui/material";
 import Button from '@mui/material/Button';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
@@ -40,9 +40,16 @@ export default function AddPatientForm() {
         getAllUserProfiles().then((user) => setUsers(user));
     }, []);
 
+    // handling select drop down menU
+    const handleSelect = (event) => {
+        const copy = { ...userChoices }
+        copy.userProfileId = parseInt(event.target.value)
+        setUserChoices(copy)
+    }
+
     // how new info will be sent to api
-    const handleSaveButtonClick = (e) => {
-        e.preventDefault(); //prevents page from reloading
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault(); //prevents page from reloading
 
         const newPatient = { ...userChoices }
 
@@ -56,14 +63,16 @@ export default function AddPatientForm() {
             userChoices.userProfileId
         ) {
             addCreature(newPatient)
-                .then(() => { navigate("/patients") });
+                .then(() => { navigate("/patients") })
+                .catch(() => alert("Please fill out the entire form!"));
         }
     };
 
     return (
 
         <Form>
-            <Typography variant="h3" align="center" pb={2}>
+
+            <Typography variant="h3" align="center" pt={3}>
                 New Patient Form
             </Typography>
             <Grid
@@ -137,26 +146,20 @@ export default function AddPatientForm() {
 
                     <FormControl variant="outlined">
                         <TextField
-                            id="UserProfileId"
+                            fullWidth
                             select
-                            sx={{ mb: 2 }}
-                            style={{ width: 300 }}
+                            id="userProfileId"
                             label="Owner"
-                            defaultValue="Owner"
+                            defaultValue=""
+                            sx={{ mb: 2 }}
+                            style={{ width: 500 }}
                             value={userChoices.userProfileId}
-                            onChange={(event) => {
-                                const copy = { ...userChoices }
-                                copy.userProfileId = parseInt(event.target.value)
-                                setUserChoices(copy)
-                            }}
+                            onChange={handleSelect}
                         >
-                            <MenuItem value="0"><em>Owner</em></MenuItem>
+                            <MenuItem value="0"><em>Human compadre</em></MenuItem>
 
                             {users.map((user) => (
-                                <MenuItem
-                                    key={user.id}
-                                    value={user.id}
-                                >
+                                <MenuItem key={user.id} value={user.id}>
                                     {user.fullName}
                                 </MenuItem>
                             ))}

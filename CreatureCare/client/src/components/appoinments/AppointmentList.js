@@ -14,21 +14,20 @@ const AppointmentList = () => {
     return (
         <Container maxWidth="xl">
 
-            <Typography variant="h3" align="center" pb={1}>
+            <Typography variant="h3" align="center" pb={5}>
                 Appointment Tracker
             </Typography>
 
             <Grid
                 container
                 spacing={5}
-                columns={{ xs: 4, sm: 8, md: 12 }}
                 alignItems="center"
                 justifyContent="space-evenly"
-                px={30}
-                py={5}
+                px={33}
+                pb={5}
             >
                 {appointments.map((appoinment) => (
-                    <Grid item key={appoinment.id} xs={12} md={4} lg={1}>
+                    <Grid item key={appoinment.id} xs={12} md={3} lg={4}>
                         <AppointmentCard appointment={appoinment} />
                     </Grid>
                 ))}

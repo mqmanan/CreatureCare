@@ -8,6 +8,9 @@ import EditPatientForm from "./creatures/EditPatientForm";
 import PatientDetails from "./creatures/PatientDetails";
 import AppointmentList from "./appoinments/AppointmentList";
 import AppointmentDateTime from "./appoinments/AppointmentDateTime";
+import UserProfileDetails from "./userProfiles/UserProfileDetails";
+import Registr from "./auth/Register";
+import Register from "./auth/Register";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -35,13 +38,11 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     <Route path="appointments/add" element={<AppointmentDateTime />} />
 
-                    {/* <Route path="profile" element={<PatientList />} />
-
-                    <Route path="profile/details" element={<PatientList />} /> */}
+                    <Route path="profile" element={<UserProfileDetails />} />
 
                     <Route path="login" element={<Login />} />
 
-                    {/* <Route path="register" element={<Register />} /> */}
+                    <Route path="register" element={<Register />} />
 
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
 

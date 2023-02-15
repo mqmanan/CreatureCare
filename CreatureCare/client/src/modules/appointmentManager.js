@@ -40,3 +40,15 @@ export const addAppointment = (appointment) => {
         });
     });
 };
+
+export const searchAllAppointments = (queryStr, descBool) => {
+    return getToken().then(token => {
+        fetch(`${baseUrl}/search?sortDesc=${descBool}&q=${(queryStr ?? "%%")}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+    })
+}
