@@ -11,7 +11,7 @@ namespace CreatureCare.Repositories
 {
     public class AppointmentRepository : BaseRepository, IAppointmentRepository
     {
-        //ask instructor to explain this line
+
         public AppointmentRepository(IConfiguration configuration) : base(configuration) { }
 
         public List<Appointment> GetAll()
@@ -95,6 +95,9 @@ namespace CreatureCare.Repositories
             }
         }
 
+
+
+        // returns an empty array in swagger.. still needs work
         public List<Appointment> Search(string criterion, bool sortDescending)
         {
             using (SqlConnection conn = Connection)
@@ -155,7 +158,9 @@ namespace CreatureCare.Repositories
                     }
                 }
             }
-        }
+        } 
+
+      
 
 
 

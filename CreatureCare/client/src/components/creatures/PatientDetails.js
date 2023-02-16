@@ -7,10 +7,13 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCreatureById, getCreatureDoctors } from '../../modules/creatureManager';
-import { Grid, Stack } from '@mui/material';
+import { Fab, Grid, Stack } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EditIcon from '@mui/icons-material/Edit';
 import PetsIcon from '@mui/icons-material/Pets';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ModeIcon from '@mui/icons-material/Mode';
+
 
 export default function PatientDetails() {
     const navigate = useNavigate();
@@ -28,19 +31,6 @@ export default function PatientDetails() {
         getCreatureDoctors(id).then((creatureDoctors) => setCreatureDoctors(creatureDoctors));
     }, []);
 
-    // <Grid
-    //                         container
-    //                         alignItems="center"
-    //                         justifyContent="space-evenly"
-    //                         p={1}
-    //                     >
-    //                         {creatureDoctors?.userProfiles?.map((creature) => (
-    //                             <Grid item key={creature.id} xs={12} md={3} lg={4}>
-    //                                 <b>Doctor</b>: {creature.fullName}
-    //                             </Grid>
-    //                         ))}
-    //                     </Grid>
-
     return (
         <Grid
             item
@@ -49,15 +39,15 @@ export default function PatientDetails() {
             justifyContent="center"
             alignItems="center"
         >
-            <Stack direction="row" spacing={5}>
+            <Stack direction="row" spacing={7}>
                 <Card
                     sx={{
-                        maxWidth: 500,
+                        maxWidth: 475,
                         boxShadow: 3
                     }}>
                     <CardMedia
                         sx={{
-                            height: 300,
+                            height: 150,
                         }}
                         image={creature.imageLocation}
                         title={creature.name}
@@ -67,7 +57,7 @@ export default function PatientDetails() {
                         <Typography gutterBottom variant="h4" component="div">
                             <center>{creature.name}</center>
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" px={3} py={1}>
+                        <Typography variant="body2" color="text.secondary" px={3}>
                             <b>Type</b>: {creature.type}<br></br>
                             <b>Origin</b>: {creature.origin}<br></br>
                             <b>Gender</b>: {creature.gender}<br></br>
@@ -85,27 +75,24 @@ export default function PatientDetails() {
                             justifyContent: "center"
                         }}
                     >
+                        <Stack direction="row" spacing={1} pb={2}>
+                            <Fab
+                                aria-label='records'
+                                color='primary'
+                                size='small'
+                                onClick={() => { navigate("/patients") }}
+                            >
+                                <ArrowBackIcon />
+                            </Fab>
 
-                        <Stack direction="row" spacing={1} pb={1} px={1}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                size="medium"
-                                startIcon={<PetsIcon />}
-                                onClick={() => { navigate("/patients") }}>
-                                Records
-                            </Button>
-
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                size="medium"
-                                endIcon={<EditIcon />}
-                                onClick={() => {
-                                    navigate(`/patients/${id}/edit`)
-                                }}>
-                                Edit
-                            </Button>
+                            <Fab
+                                aria-label='edit'
+                                color='primary'
+                                size='small'
+                                onClick={() => { navigate(`/patients/${id}/edit`) }}
+                            >
+                                <ModeIcon />
+                            </Fab>
                         </Stack>
 
                     </CardActions>
@@ -123,7 +110,7 @@ export default function PatientDetails() {
                             <center>Associated Doctors</center>
                         </Typography>
 
-                        {creatureDoctors?.userProfiles?.map((doctor) => (
+                        {creatureDoctors?.userProfiles?.map((userProfileDoc) => (
                             <Grid
                                 item
                                 xs={12}
@@ -138,7 +125,7 @@ export default function PatientDetails() {
                                     size="small"
                                     startIcon={<PersonIcon />}
                                     onClick={() => { navigate("/staff") }}>
-                                    {doctor.fullName}
+                                    {userProfileDoc.fullName}
                                 </Button>
                             </Grid>
 

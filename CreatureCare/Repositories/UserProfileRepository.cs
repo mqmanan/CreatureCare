@@ -2,6 +2,7 @@
 using CreatureCare.Models;
 using CreatureCare.Utils;
 using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 
 namespace CreatureCare.Repositories
 {
@@ -219,6 +220,53 @@ namespace CreatureCare.Repositories
                     reader.Close();
 
                     return profiles;
+                }
+            }
+        }
+
+        public UserProfile GetUserByIdWithCreatures(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT c.Id 'CId', up.Id 'UPId', up.fullName, c.Name
+                        FROM UserProfile up
+                        LEFT JOIN Creature c ON c.UserProfileId = up.Id
+                        WHERE c.IsActive = 1 AND up.Id = @id;
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // reads thru columns of data table
+                    {
+
+                        UserProfile userProfile = null;
+                        while (reader.Read()) //reads thru rows of data table and pulls out different data
+                        {
+                            if (userProfile == null)
+                            {
+                                userProfile = new UserProfile()
+                                {
+                                    Id = id,
+                                    FullName = DbUtils.GetString(reader, "FullName"),
+                                    Creatures = new List<Creature>()
+                                };
+                            }
+
+                            if (DbUtils.IsNotDbNull(reader, "CId")) // pull out userProfile data
+                            {
+                                userProfile.Creatures.Add(new Creature()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CId"),
+                                    Name = DbUtils.GetString(reader, "Name"),
+                                });
+                            }
+                        }
+                        return userProfile;
+                    }
                 }
             }
         }

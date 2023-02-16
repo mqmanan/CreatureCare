@@ -73,14 +73,14 @@ namespace CreatureCare.Controllers
         public IActionResult Post(Appointment appointment)
         {
             // this will allow the server side to attach the current userProfile.Id to the appointment
-            //var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
-            //var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
+            var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
 
-            //creature.UserProfileId = user.Id;
+            appointment.UserProfileDocId = user.Id;
 
             _appointmentRepository.Add(appointment);
 
-            return CreatedAtAction("Get", new { id = appointment.Id }, appointment);
+            return Ok(appointment);
         }
 
         //[HttpPut("{id}/edit")]

@@ -22,7 +22,7 @@ export const getAllAppointments = () => {
 
 export const addAppointment = (appointment) => {
     return getToken().then((token) => {
-        return fetch(baseUrl, { //update URL
+        return fetch(baseUrl, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -41,6 +41,7 @@ export const addAppointment = (appointment) => {
     });
 };
 
+// work in progress; stretch goal
 export const searchAllAppointments = (queryStr, descBool) => {
     return getToken().then(token => {
         fetch(`${baseUrl}/search?sortDesc=${descBool}&q=${(queryStr ?? "%%")}`, {

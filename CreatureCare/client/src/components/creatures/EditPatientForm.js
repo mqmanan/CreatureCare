@@ -1,5 +1,5 @@
 import {
-    Grid, TextField, Select, FormControl, Stack, MenuItem, Typography, InputLabel
+    Grid, TextField, Stack, Typography, Box
 } from "@mui/material";
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { getAllUserProfiles } from "../../modules/userProfileManager";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SaveIcon from '@mui/icons-material/Save';
 import PetsIcon from '@mui/icons-material/Pets';
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const initialUserChoiceValues = {
     id: 0,
@@ -77,124 +78,187 @@ export default function EditPatientForm() {
     }
 
     return (
+        <>
+            <Form>
+                <Box
+                    sx={{
+                        padding: '10px'
+                    }}>
+                    <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
 
-        <Form>
-            <Typography variant="h3" align="center" pb={2}>
-                Edit Patient Details
-            </Typography>
-            <Grid
-                container
-                align="center"
-                p={3}>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id="name"
-                        label="Name"
-                        variant="outlined"
-                        placeholder="Name of creature?"
-                        value={userChoices.name}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="type"
-                        label="Type"
-                        variant="outlined"
-                        placeholder="Type of creature? If unsure, type N/A"
-                        value={userChoices.type}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="origin"
-                        label="Origin"
-                        variant="outlined"
-                        placeholder="Which universe is the creature from? If unsure, type N/A"
-                        value={userChoices.origin}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="gender"
-                        label="Gender"
-                        variant="outlined"
-                        placeholder="Male or Female? Other? If unsure, type N/A"
-                        value={userChoices.gender}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                </Grid>
+                        <Grid container direction="column" item xs={12} md={4}>
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItem: "center"
+                                }} >
 
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id="birthdate"
-                        label="Birthdate"
-                        variant="outlined"
-                        placeholder="Use this format please: YYYY-MM-DD"
-                        value={userChoices.birthdate}
-                        onChange={handleInputChange}
-                        sx={{ my: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="imageLocation"
-                        label="ImageURL"
-                        variant="outlined"
-                        placeholder="http://www.google.com"
-                        value={userChoices.imageLocation}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
+                                <Typography variant="h3" align="center">
+                                    • E D I T •
+                                </Typography>
 
-                    <TextField
-                        fullWidth
-                        id="description"
-                        label="Description"
-                        variant="outlined"
-                        multiline
-                        rows={4}
-                        placeholder="Short creature bio"
-                        value={userChoices.description}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
+                            </Grid>
 
-                    <Stack direction="row" spacing={1} pb={2}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="medium"
-                            startIcon={<PetsIcon />}
-                            onClick={() => { navigate("/patients") }}>
-                            Records
-                        </Button>
+                            <Grid
+                                item
+                                spacing={3}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "flex-start",
+                                    alignItem: "left"
+                                }} >
 
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="medium"
-                            startIcon={<SaveIcon />}
-                            onClick={handleSaveButtonClick}>
-                            Save
-                        </Button>
+                                <Player
+                                    src='https://assets3.lottiefiles.com/packages/lf20_1c4di8xm.json'
+                                    className="player"
+                                    loop
+                                    autoplay
+                                    style={{
+                                        height: '300px',
+                                        width: '450px',
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
 
-                        <Button
-                            variant="contained"
-                            color="error"
-                            size="small"
-                            startIcon={<DeleteForeverIcon />}
-                            onClick={handleDeleteButton}>
-                            Delete
-                        </Button>
-                    </Stack>
+                        <Grid container direction="column" item xs={12} md={6}>
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "flex-center",
+                                    alignItem: "left"
+                                }} >
 
-                </Grid>
-            </Grid>
-        </Form>
+                                <TextField
+                                    fullWidth
+                                    id="name"
+                                    label="Name"
+                                    variant="outlined"
+                                    placeholder="Name of creature?"
+                                    value={userChoices.name}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="type"
+                                    label="Type"
+                                    variant="outlined"
+                                    placeholder="Type of creature? If unsure, type N/A"
+                                    value={userChoices.type}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                            </Grid>
+
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "flex-center",
+                                    alignItem: "left"
+                                }} >
+                                <TextField
+                                    fullWidth
+                                    id="origin"
+                                    label="Origin"
+                                    variant="outlined"
+                                    placeholder="Which universe is the creature from? If unsure, type N/A"
+                                    value={userChoices.origin}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="gender"
+                                    label="Gender"
+                                    variant="outlined"
+                                    placeholder="Male or Female? Other? If unsure, type N/A"
+                                    value={userChoices.gender}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    id="birthdate"
+                                    label="Birthdate"
+                                    variant="outlined"
+                                    placeholder="Use this format please: YYYY-MM-DD"
+                                    value={userChoices.birthdate}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="imageLocation"
+                                    label="ImageURL"
+                                    variant="outlined"
+                                    placeholder="http://www.google.com"
+                                    value={userChoices.imageLocation}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+
+                                <TextField
+                                    fullWidth
+                                    id="description"
+                                    label="Description"
+                                    variant="outlined"
+                                    multiline
+                                    rows={4}
+                                    placeholder="Short creature bio"
+                                    value={userChoices.description}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+
+                                <Stack direction="row" spacing={1} pt={1}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="medium"
+                                        startIcon={<PetsIcon />}
+                                        onClick={() => { navigate("/patients") }}>
+                                        Records
+                                    </Button>
+
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="medium"
+                                        startIcon={<SaveIcon />}
+                                        onClick={handleSaveButtonClick}>
+                                        Save
+                                    </Button>
+
+                                    <Button
+                                        variant="contained"
+                                        color="error"
+                                        size="small"
+                                        startIcon={<DeleteForeverIcon />}
+                                        onClick={handleDeleteButton}>
+                                        Delete
+                                    </Button>
+                                </Stack>
+
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </Box>
+            </Form >
+        </>
     )
 }

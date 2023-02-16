@@ -36,11 +36,6 @@ const AppointmentCard = ({ appointment }) => {
             <CardActions display="flex" justifyContent="center">
                 <Button
                     size="small"
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center"
-                    }}
                     onClick={() => { navigate(`/appointments/${appointment.id}`) }}>
                     See Details</Button>
             </CardActions>
