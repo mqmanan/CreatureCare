@@ -17,7 +17,7 @@ export default function Hello() {
                 align="center"
                 mb={1}
             >
-                Welcome, {userProfile.fullName}!
+                Welcome, {userProfile.fullName}!<br></br>
             </Typography>
 
             <Player
@@ -26,8 +26,8 @@ export default function Hello() {
                 loop
                 autoplay
                 style={{
-                    height: '400px',
-                    width: '400px',
+                    height: '350px',
+                    width: '350px',
                 }}
             />
 

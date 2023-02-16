@@ -78,7 +78,7 @@ export default function NavBar({ isLoggedIn, userProfile }) {
                                     handleClose(event)
                                     navigate("/patients/add")
                                 }}>
-                                Add New Patient
+                                Add Patient
                             </MenuItem>
                         </Menu>
 
