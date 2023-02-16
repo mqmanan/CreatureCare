@@ -9,10 +9,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getCreatureById, getCreatureDoctors } from '../../modules/creatureManager';
 import { Fab, Grid, Stack } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import EditIcon from '@mui/icons-material/Edit';
-import PetsIcon from '@mui/icons-material/Pets';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ModeIcon from '@mui/icons-material/Mode';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 
 export default function PatientDetails() {
@@ -57,7 +56,7 @@ export default function PatientDetails() {
                         <Typography gutterBottom variant="h4" component="div">
                             <center>{creature.name}</center>
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" px={3}>
+                        <Typography variant="body2" color="text.secondary" px={2}>
                             <b>Type</b>: {creature.type}<br></br>
                             <b>Origin</b>: {creature.origin}<br></br>
                             <b>Gender</b>: {creature.gender}<br></br>
@@ -72,10 +71,10 @@ export default function PatientDetails() {
                         style={{
                             display: "flex",
                             flexDirection: "row",
-                            justifyContent: "center"
+                            justifyContent: "center",
                         }}
                     >
-                        <Stack direction="row" spacing={1} pb={2}>
+                        <Stack direction="row" spacing={1}>
                             <Fab
                                 aria-label='records'
                                 color='primary'
@@ -101,7 +100,7 @@ export default function PatientDetails() {
                 <Card
                     sx={{
                         maxWidth: 500,
-                        height: 300,
+                        height: 500,
                         boxShadow: 3,
                         p: 3
                     }}>
@@ -110,6 +109,17 @@ export default function PatientDetails() {
                             <center>Associated Doctors</center>
                         </Typography>
 
+                        <Player
+                            src='https://assets4.lottiefiles.com/packages/lf20_1yy002na.json'
+                            className="player"
+                            loop
+                            autoplay
+                            style={{
+                                height: '50px',
+                                width: '50px',
+                            }}
+                        />
+
                         {creatureDoctors?.userProfiles?.map((userProfileDoc) => (
                             <Grid
                                 item
@@ -117,7 +127,7 @@ export default function PatientDetails() {
                                 display="flex"
                                 justifyContent="center"
                                 alignItems="center"
-                                p={1}
+                                pt={2}
                             >
                                 <Button
                                     variant="contained"
@@ -128,9 +138,7 @@ export default function PatientDetails() {
                                     {userProfileDoc.fullName}
                                 </Button>
                             </Grid>
-
                         ))}
-
                     </CardContent>
                 </Card>
             </Stack>

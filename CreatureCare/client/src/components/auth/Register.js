@@ -63,7 +63,7 @@ export default function Register() {
                         type={'email'}
                         variant="outlined"
                         placeholder="Email"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <TextField

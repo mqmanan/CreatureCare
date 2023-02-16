@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllCreatures } from "../../modules/creatureManager";
 import Grid from '@mui/material/Grid';
 import PatientCard from "./PatientCard";
-import { Container, Skeleton, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export default function PatientList() {
     const [creatures, setCreatures] = useState([]);
@@ -12,9 +12,10 @@ export default function PatientList() {
         getAllCreatures().then((creature) => setCreatures(creature));
     }, []);
 
-    if (!userProfile.imageLocation) {
-        userProfile.imageLocation = "https://robohash.org/numquamutut.png?size=150x150&set=set1";
-    }
+    // stretch goal = would like to render a 404 sign
+    // if (!userProfile.imageLocation) {
+    //     userProfile.imageLocation = "https://robohash.org/numquamutut.png?size=150x150&set=set1";
+    // }
 
     return (
         <Container maxWidth="xl">

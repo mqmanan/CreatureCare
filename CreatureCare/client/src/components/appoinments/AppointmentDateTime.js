@@ -5,10 +5,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { Container } from '@mui/system';
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Box, Button, FormControl, Grid, MenuItem, Paper, Typography } from '@mui/material';
+import { Box, Button, FormControl, Grid, MenuItem, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addAppointment } from '../../modules/appointmentManager';
 import { getUserWithCreatures } from '../../modules/userProfileManager';
@@ -16,7 +15,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 export default function AppointmentDateTime() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    // const { id } = useParams();
 
     // inital state render
     const [userCreatures, setUserCreatures] = useState([])

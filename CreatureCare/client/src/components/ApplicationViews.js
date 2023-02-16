@@ -9,7 +9,6 @@ import PatientDetails from "./creatures/PatientDetails";
 import AppointmentList from "./appoinments/AppointmentList";
 import AppointmentDateTime from "./appoinments/AppointmentDateTime";
 import UserProfileDetails from "./userProfiles/UserProfileDetails";
-import Registr from "./auth/Register";
 import Register from "./auth/Register";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -39,6 +38,8 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Route path="appointments/add" element={<AppointmentDateTime />} />
 
                     <Route path="profile" element={<UserProfileDetails />} />
+
+                    {/* <Route path="profile/:id/edit" element={<UserProfileDetails />} /> */}
 
                     <Route path="login" element={<Login />} />
 
