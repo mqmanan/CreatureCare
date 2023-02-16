@@ -11,5 +11,6 @@ namespace CreatureCare.Repositories
         UserProfile GetUserByIdWithUserType(int id);
         List<UserProfile> GetAllAdmin();
         List<UserProfile> GetAll();
+        UserProfile GetUserByIdWithCreatures(int id);
     }
 }

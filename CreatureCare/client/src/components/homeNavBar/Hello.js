@@ -1,3 +1,5 @@
+import { Player } from "@lottiefiles/react-lottie-player";
+import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { me } from "../../modules/authManager";
 
@@ -9,13 +11,26 @@ export default function Hello() {
     }, []);
 
     return (
-        <span style={{
-            position: "fixed",
-            left: 0,
-            right: 0,
-            top: "50%",
-            marginTop: "-0.5rem",
-            textAlign: "center",
-        }}>Welcome {userProfile.fullName}!</span>
+        <>
+            <Typography
+                variant="h3"
+                align="center"
+                mb={1}
+            >
+                Welcome, {userProfile.fullName}!
+            </Typography>
+
+            <Player
+                src='https://assets3.lottiefiles.com/packages/lf20_lb6Gsk.json'
+                className="player"
+                loop
+                autoplay
+                style={{
+                    height: '400px',
+                    width: '400px',
+                }}
+            />
+
+        </>
     );
 }

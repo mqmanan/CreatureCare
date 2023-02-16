@@ -41,8 +41,30 @@ export const getCurrentUserByFirebaseId = (firebaseId) => {
     })
 }
 
+export const getUserWithCreatures = () => {
+    return getToken().then((token) => {
+        return fetch(`${_baseUrl}/GetUserByIdWithCreatures`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+
+                } else {
+                    throw new Error(
+                        "An error occurred while trying get current user with creatures.",
+                    );
+                }
+            })
+    })
+}
+
 export const getUserProfileDetails = (id) => {
-    return fetch(`${_baseUrl}/GetUserByIdWithUserType/${id}`).then((res) => res.json());
+    return fetch(`${_baseUrl}/GetUserByIdWithUserType/${id}`)
+        .then((res) => res.json());
 };
 
 export const addUserProfile = (newProfile) => {

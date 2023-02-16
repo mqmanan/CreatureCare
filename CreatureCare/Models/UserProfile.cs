@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CreatureCare.Models
@@ -35,5 +36,6 @@ namespace CreatureCare.Models
         public UserType UserType { get; set; }
 
         public Creature Creature { get; set; }
+        public List<Creature> Creatures { get; set; }
     }
 }

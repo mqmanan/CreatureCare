@@ -1,4 +1,4 @@
-import Paper from '@mui/material/Paper';
+import { Box, Paper } from '@mui/material';
 // import { createTheme } from "@mui/material/";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
@@ -32,10 +32,10 @@ export function useForm(initialUserChoiceValues) {
 export function Form(props) {
 
     return (
-        <Paper elevation={3}>
+        <Box>
             <form>
                 {props.children}
             </form>
-        </Paper>
+        </Box>
     )
 }

@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { CssBaseline } from '@mui/material';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,7 +15,10 @@ firebase.initializeApp(firebaseConfig);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 
-  <App />
+  <CssBaseline enableColorScheme >
+    <App />
+  </CssBaseline>
+
 );
 
 reportWebVitals();

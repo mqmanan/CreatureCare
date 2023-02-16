@@ -5,6 +5,8 @@ import {
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { me } from "../../modules/authManager";
+import PetsIcon from '@mui/icons-material/Pets';
+import { getUserWithCreatures } from "../../modules/userProfileManager";
 
 
 const UserProfileDetails = () => {
@@ -14,6 +16,11 @@ const UserProfileDetails = () => {
     useEffect(() => {
         me().then(setUserProfile);
     }, []);
+
+    // useEffect(() => {
+    //     getUserWithCreatures(id).then((userCreature) => setCreatures(userCreature));
+    // }, []);
+
 
     if (!userProfile.imageLocation) {
         userProfile.imageLocation = "https://robohash.org/numquamutut.png?size=150x150&set=set1";
@@ -63,6 +70,8 @@ const UserProfileDetails = () => {
                             Edit</Button>
                     </CardActions>
                 </Card>
+
+
 
             </Grid>
         </Container>

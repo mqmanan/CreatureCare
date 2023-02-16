@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllCreatures } from "../../modules/creatureManager";
 import Grid from '@mui/material/Grid';
 import PatientCard from "./PatientCard";
-import { Container, Typography } from "@mui/material";
+import { Container, Skeleton, Typography } from "@mui/material";
 
 export default function PatientList() {
     const [creatures, setCreatures] = useState([]);
@@ -11,6 +11,10 @@ export default function PatientList() {
     useEffect(() => {
         getAllCreatures().then((creature) => setCreatures(creature));
     }, []);
+
+    if (!userProfile.imageLocation) {
+        userProfile.imageLocation = "https://robohash.org/numquamutut.png?size=150x150&set=set1";
+    }
 
     return (
         <Container maxWidth="xl">

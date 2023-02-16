@@ -12,9 +12,18 @@ namespace CreatureCare.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        public UserProfileController(IUserProfileRepository userProfileRepository)
+        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly ICreatureRepository _creatureRepository;
+
+        public UserProfileController(
+            IUserProfileRepository userProfileRepository,
+            IAppointmentRepository appointmentRepository,
+            ICreatureRepository creatureRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _appointmentRepository = appointmentRepository;
+            _creatureRepository = creatureRepository;
+
         }
 
         [HttpGet("{firebaseUserId}")]
@@ -77,6 +86,14 @@ namespace CreatureCare.Controllers
         public IActionResult GetUserByIdWithUserType(int id)
         {
             return Ok(_userProfileRepository.GetUserByIdWithUserType(id));
+        }
+
+        [HttpGet("GetUserByIdWithCreatures")]
+        public IActionResult GetUserByIdWithCreatures()
+        {
+            var currentUserProfile = GetCurrentUserProfile();            
+
+            return Ok(_userProfileRepository.GetUserByIdWithCreatures(currentUserProfile.Id));
         }
 
         private UserProfile GetCurrentUserProfile()

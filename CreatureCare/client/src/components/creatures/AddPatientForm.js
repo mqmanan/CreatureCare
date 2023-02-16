@@ -1,5 +1,5 @@
 import {
-    Grid, TextField, FormControl, MenuItem, Stack, Typography, Select
+    Grid, TextField, FormControl, MenuItem, Stack, Typography, Select, Box
 } from "@mui/material";
 import Button from '@mui/material/Button';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Form } from "./useForm";
 import { getAllUserProfiles } from "../../modules/userProfileManager";
 import { addCreature } from "../../modules/creatureManager";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const initialUserChoiceValues = {
     id: 0,
@@ -40,7 +41,7 @@ export default function AddPatientForm() {
         getAllUserProfiles().then((user) => setUsers(user));
     }, []);
 
-    // handling select drop down menU
+    // handling select drop down menu
     const handleSelect = (event) => {
         const copy = { ...userChoices }
         copy.userProfileId = parseInt(event.target.value)
@@ -69,137 +70,186 @@ export default function AddPatientForm() {
     };
 
     return (
+        <>
+            <Form>
+                <Box
+                    sx={{
+                        maxWidth: "600"
+                    }}>
+                    <Grid
+                        container
+                        p={1}
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
 
-        <Form>
+                        <Grid container direction="column" item xs={12} md={4}>
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItem: "center"
+                                }} >
 
-            <Typography variant="h3" align="center" pt={3}>
-                New Patient Form
-            </Typography>
-            <Grid
-                container
-                align="center"
-                p={3}>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id="name"
-                        label="Name"
-                        variant="outlined"
-                        placeholder="Name of creature?"
-                        value={userChoices.name}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="type"
-                        label="Type"
-                        variant="outlined"
-                        placeholder="Type of creature? If unsure, type N/A"
-                        value={userChoices.type}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="origin"
-                        label="Origin"
-                        variant="outlined"
-                        placeholder="Which universe is the creature from? If unsure, type N/A"
-                        value={userChoices.origin}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="gender"
-                        label="Gender"
-                        variant="outlined"
-                        placeholder="Male or Female? Other? If unsure, type N/A"
-                        value={userChoices.gender}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
-                </Grid>
+                                <Typography variant="h3" align="center">
+                                    New Patient File
+                                </Typography>
 
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id="birthdate"
-                        label="Birthdate"
-                        variant="outlined"
-                        placeholder="Use this format please: YYYY-MM-DD"
-                        value={userChoices.birthdate}
-                        onChange={handleInputChange}
-                        sx={{ my: 2 }}
-                    />
-                    <TextField
-                        fullWidth
-                        id="imageLocation"
-                        label="ImageURL"
-                        variant="outlined"
-                        placeholder="http://www.google.com"
-                        value={userChoices.imageLocation}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
+                            </Grid>
 
-                    <FormControl variant="outlined">
-                        <TextField
-                            fullWidth
-                            select
-                            id="userProfileId"
-                            label="Owner"
-                            defaultValue=""
-                            sx={{ mb: 2 }}
-                            style={{ width: 500 }}
-                            value={userChoices.userProfileId}
-                            onChange={handleSelect}
-                        >
-                            <MenuItem value="0"><em>Human compadre</em></MenuItem>
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItem: "center"
+                                }} >
 
-                            {users.map((user) => (
-                                <MenuItem key={user.id} value={user.id}>
-                                    {user.fullName}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </FormControl>
+                                <Player
+                                    src='https://assets5.lottiefiles.com/private_files/lf30_bivykh3v.json'
+                                    className="player"
+                                    loop
+                                    autoplay
+                                    style={{
+                                        height: '350px',
+                                        width: '350px',
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
 
-                    <TextField
-                        fullWidth
-                        id="description"
-                        label="Description"
-                        variant="outlined"
-                        multiline
-                        rows={4}
-                        placeholder="Short creature bio"
-                        value={userChoices.description}
-                        onChange={handleInputChange}
-                        sx={{ mb: 2 }}
-                    />
+                        <Grid container direction="column" item xs={12} md={3}>
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "flex-center",
+                                    alignItem: "left"
+                                }} >
 
-                    <Stack direction="row" spacing={2} pb={2}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="medium"
-                            endIcon={<SaveRoundedIcon />}
-                            onClick={handleSaveButtonClick}>
-                            Save
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="medium"
-                            startIcon={<ClearRoundedIcon />}
-                            onClick={() => { navigate("/patients") }}>
-                            Cancel
-                        </Button>
-                    </Stack>
+                                <TextField
+                                    fullWidth
+                                    margin="dense"
+                                    id="name"
+                                    label="Name"
+                                    variant="outlined"
+                                    placeholder="Name of creature?"
+                                    value={userChoices.name}
+                                    onChange={handleInputChange}
+                                />
+                            </Grid>
 
-                </Grid>
-            </Grid>
-        </Form>
+                            <TextField
+                                margin="dense"
+                                id="type"
+                                label="Type"
+                                variant="outlined"
+                                placeholder="Type of creature? If unsure, type N/A"
+                                value={userChoices.type}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                margin="dense"
+                                id="origin"
+                                label="Origin"
+                                variant="outlined"
+                                placeholder="Which universe is the creature from? If unsure, type N/A"
+                                value={userChoices.origin}
+                                onChange={handleInputChange}
+                            />
+                            <TextField
+                                margin="dense"
+                                id="gender"
+                                label="Gender"
+                                variant="outlined"
+                                placeholder="Male or Female? Other? If unsure, type N/A"
+                                value={userChoices.gender}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                margin="dense"
+                                id="birthdate"
+                                label="Birthdate"
+                                variant="outlined"
+                                placeholder="Use this format please: YYYY-MM-DD"
+                                value={userChoices.birthdate}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                margin="dense"
+                                id="imageLocation"
+                                label="ImageURL"
+                                variant="outlined"
+                                placeholder="http://www.google.com"
+                                value={userChoices.imageLocation}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                margin="dense"
+                                select
+                                variant="outlined"
+                                id="userProfileId"
+                                label="Owner"
+                                defaultValue=""
+                                style={{ width: 500 }}
+                                value={userChoices.userProfileId}
+                                onChange={handleSelect}
+                            >
+                                <MenuItem value="0"><em>Human compadre</em></MenuItem>
+
+                                {users.map((user) => (
+                                    <MenuItem key={user.id} value={user.id}>
+                                        {user.fullName}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+
+                            <TextField
+                                margin="dense"
+                                id="description"
+                                label="Description"
+                                variant="outlined"
+                                multiline
+                                rows={2}
+                                placeholder="Short creature bio"
+                                value={userChoices.description}
+                                onChange={handleInputChange}
+                            />
+
+                            <Stack direction="row" spacing={1} pb={2} pt={2}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    size="medium"
+                                    endIcon={<SaveRoundedIcon />}
+                                    onClick={handleSaveButtonClick}>
+                                    Save
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    size="medium"
+                                    startIcon={<ClearRoundedIcon />}
+                                    onClick={() => { navigate("/patients") }}>
+                                    Cancel
+                                </Button>
+                            </Stack>
+
+
+                        </Grid>
+
+                    </Grid>
+
+                </Box >
+
+            </Form >
+        </>
     )
 }
+
