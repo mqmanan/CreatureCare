@@ -7,14 +7,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { me } from "../../modules/authManager";
 import PetsIcon from '@mui/icons-material/Pets';
 import { getUserWithCreatures } from "../../modules/userProfileManager";
-import ModeIcon from '@mui/icons-material/Mode';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Player } from "@lottiefiles/react-lottie-player";
 
 
 const UserProfileDetails = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
 
     const [userProfile, setUserProfile] = useState({});
     const [userCreatures, setUserCreatures] = useState({});

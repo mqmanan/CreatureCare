@@ -1,5 +1,5 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Container, Grid, Paper, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { me } from "../../modules/authManager";
 
@@ -11,106 +11,76 @@ export default function Hello() {
     }, []);
 
     return (
-        <>
-            <Box
-                sx={{
-                    padding: '0px'
-                }}>
+        <Container>
+            <Grid container spacing={4}>
+
                 <Grid
-                    container
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="center"
+                    item xs={12} sm={8} md={5}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItem: "center"
+                    }}
                 >
-
-                    <Grid container direction="column" item xs={12} md={6}>
-                        <Grid
-                            item
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItem: "end"
-                            }}>
-
-                            <Typography
-                                variant="h3"
-                                align="center"
-                                mb={1}
-                            >
-
-
-                            </Typography>
-
-                        </Grid>
-
-                        <Grid
-                            item
-                            spacing={3}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItem: "end"
-                            }} >
-
-                            <Player
-                                src='https://assets3.lottiefiles.com/packages/lf20_lb6Gsk.json'
-                                className="player"
-                                loop
-                                autoplay
-                                style={{
-                                    height: '450px',
-                                    width: '450px',
-                                }}
-                            />
-                        </Grid>
-                    </Grid>
-
-                    <Grid container direction="column" item xs={12} md={6}>
-                        <Grid
-                            item
-                            sx={{
-                                display: "flex",
-                                justifyContent: "flex-center",
-                                alignItem: "center"
-                            }} >
-                            <Typography variant="h3" align="left">
-                                Welcome {userProfile.fullName}!<br></br>
-                            </Typography>
-                        </Grid>
-                        <Grid
-                            item
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItem: "left"
-                            }} >
-                            <Typography
-                                variant="h5"
-                                align="left"
-                                mb={1}
-                            >
-
-                                This application will help any organization organize<br>
-                                </br>& manage their files, appointments, & clients.
-
-
-                            </Typography></Grid>
-
-                        <Grid
-                            item
-                            sx={{
-                                display: "flex",
-                                justifyContent: "flex-center",
-                                alignItem: "left"
-                            }} >
-                            <Typography variant="h3" align="center">
-
-                            </Typography>
-                        </Grid>
-
-                    </Grid>
+                    <Player
+                        src='https://assets3.lottiefiles.com/packages/lf20_lb6Gsk.json'
+                        className="player"
+                        loop
+                        autoplay
+                        style={{
+                            height: '480px',
+                            width: '480px',
+                        }}
+                    />
                 </Grid>
-            </Box>
-        </>
+
+                <Grid
+                    item xs={12} sm={6} md={7}
+                    zeroMinWidth
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItem: "center",
+                    }}
+                >
+                    <Card
+                        sx={{
+                            maxWidth: 700, boxShadow: 2
+                        }}
+                    >
+                        <CardContent alignitems="center">
+                            <Typography variant="h4" align="center" p={2}>
+                                <b>Welcome, <i>{userProfile.fullName}</i>!</b><br></br>
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                px={2}
+                                align="justify"
+                            >
+                                <i>CreatureCare</i> is a management system that is designed to help organizations manage & organize files, appointments, & clients!<br></br><br></br>
+
+                                <h4>Functionalities in my app include:</h4>
+                                • EDIT, DELETE, VIEW patient files -- admins<br></br>
+                                • ADD new patients with the ability to see all users -- admins<br></br>
+                                • ADD new patients -- all users<br></br>
+                                • VIEW profile details -- all users<br></br>
+                                • VIEW all appointments -- admins<br></br><br></br>
+
+                                <h4>Stretch goals include:</h4>
+                                • Different navbar for admins/users<br></br>
+                                • EDIT, DELETE appointments for all users<br></br>
+                                • VIEW appointment details that can include notes -- all users<br></br>
+                                • VIEW pet details & appointments on their profile page -- all users<br></br>
+                                • Search bar for patient records & appointments -- admins<br></br>
+
+
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+            </Grid>
+        </Container>
     );
 }

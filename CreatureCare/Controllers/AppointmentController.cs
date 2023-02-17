@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace CreatureCare.Controllers
 {
-    // [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentController : ControllerBase

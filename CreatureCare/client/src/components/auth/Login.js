@@ -29,7 +29,7 @@ export default function Login() {
                     alignitems="center"
                     justifyContent={'center'}
                     margin="auto"
-                    padding={4}
+                    padding={5}
                     borderRadius={5}
                     boxShadow={"5px 5px 10px #ccc"}
                     sx={{
