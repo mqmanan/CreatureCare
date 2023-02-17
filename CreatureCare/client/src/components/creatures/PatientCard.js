@@ -16,14 +16,9 @@ export default function PatientCard({ creature }) {
                 sx={{ maxWidth: 315, boxShadow: 3 }}
             >
                 <CardMedia
-                    sx={{
-                        height: 200,
-                        '--Grid-borderWidth': '2px',
-                        borderTop: 'var(--Grid-borderWidth) solid',
-                        borderColor: 'divider',
-                    }}
+                    sx={{ height: 200 }}
                     image={creature.imageLocation}
-                    title="creature image"
+                    title={creature.name}
                     component='div'
                 />
                 <CardContent>

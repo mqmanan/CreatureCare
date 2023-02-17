@@ -46,64 +46,20 @@ namespace CreatureCare.Controllers
             return Ok(_appointmentRepository.Search(q, sortDesc));
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var creature = _creatureRepository.GetById(id);
-        //    if (creature == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(creature);
-        //}
-
-        //[HttpGet("edit/{id}")]
-        //public IActionResult GetCreature(int id)
-        //{
-        //    var creature = _creatureRepository.GetOneCreature(id);
-        //    if (creature == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(creature);
-        //}
-
         // POST: new appointment info
         [HttpPost]
         public IActionResult Post(Appointment appointment)
         {
             // this will allow the server side to attach the current userProfile.Id to the appointment
-            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
-            var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            // var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; //gets cookie data
+            // var user = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
 
-            appointment.UserProfileDocId = user.Id;
+            // appointment.UserProfileDocId = user.Id;
 
             _appointmentRepository.Add(appointment);
 
             return Ok(appointment);
         }
-
-        //[HttpPut("{id}/edit")]
-        //public IActionResult Put(Creature creature)
-        //{
-        //    _creatureRepository.Update(creature);
-        //    return Ok(creature);
-        //}
-
-        //[HttpPatch("{id}/deactivate")]
-        //public IActionResult SoftDeleteCreature(int id)
-        //{
-        //    try
-        //    {
-        //        _creatureRepository.Deactivate(id);
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    return Ok();
-        //}
 
         private UserProfile GetCurrentUserProfile()
         {

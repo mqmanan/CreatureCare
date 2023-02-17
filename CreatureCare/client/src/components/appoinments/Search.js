@@ -1,8 +1,6 @@
-import { TextField } from "@mui/material";
-import { DatePicker } from '@mui/lab'
 import React, { useState, useEffect } from "react";
 
-
+// WORK IN PROGRESS!!
 export default function SearchBar() {
     const [appointments, setAppointments] = useState([]);
     const [query, setQuery] = useState("");

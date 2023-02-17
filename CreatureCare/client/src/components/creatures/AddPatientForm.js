@@ -10,6 +10,7 @@ import { useForm, Form } from "./useForm";
 import { getAllUserProfiles } from "../../modules/userProfileManager";
 import { addCreature } from "../../modules/creatureManager";
 import { Player } from "@lottiefiles/react-lottie-player";
+import PetsIcon from '@mui/icons-material/Pets';
 
 const initialUserChoiceValues = {
     id: 0,
@@ -74,11 +75,10 @@ export default function AddPatientForm() {
             <Form>
                 <Box
                     sx={{
-                        maxWidth: "600"
+                        padding: '10px'
                     }}>
                     <Grid
                         container
-                        p={1}
                         direction="row"
                         alignItems="center"
                         justifyContent="center"
@@ -93,7 +93,7 @@ export default function AddPatientForm() {
                                     alignItem: "center"
                                 }} >
 
-                                <Typography variant="h3" align="center">
+                                <Typography variant="h3" align="center" pb={1}>
                                     New Patient File
                                 </Typography>
 
@@ -103,24 +103,24 @@ export default function AddPatientForm() {
                                 item
                                 sx={{
                                     display: "flex",
-                                    justifyContent: "center",
-                                    alignItem: "center"
+                                    justifyContent: "flex-start",
+                                    alignItem: "left"
                                 }} >
 
                                 <Player
-                                    src='https://assets5.lottiefiles.com/private_files/lf30_bivykh3v.json'
+                                    src='https://assets8.lottiefiles.com/packages/lf20_olluraqu.json'
                                     className="player"
                                     loop
                                     autoplay
                                     style={{
-                                        height: '350px',
-                                        width: '350px',
+                                        height: '300px',
+                                        width: '450px',
                                     }}
                                 />
                             </Grid>
                         </Grid>
 
-                        <Grid container direction="column" item xs={12} md={3}>
+                        <Grid container direction="column" item xs={12} md={6}>
                             <Grid
                                 item
                                 sx={{
@@ -131,125 +131,137 @@ export default function AddPatientForm() {
 
                                 <TextField
                                     fullWidth
-                                    margin="dense"
                                     id="name"
                                     label="Name"
                                     variant="outlined"
                                     placeholder="Name of creature?"
                                     value={userChoices.name}
                                     onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="type"
+                                    label="Type"
+                                    variant="outlined"
+                                    placeholder="Type of creature?"
+                                    value={userChoices.type}
+                                    onChange={handleInputChange}
+                                    margin="dense"
                                 />
                             </Grid>
 
-                            <TextField
-                                margin="dense"
-                                id="type"
-                                label="Type"
-                                variant="outlined"
-                                placeholder="Type of creature? If unsure, type N/A"
-                                value={userChoices.type}
-                                onChange={handleInputChange}
-                            />
+                            <Grid
+                                item
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "flex-center",
+                                    alignItem: "left"
+                                }} >
+                                <TextField
+                                    fullWidth
+                                    id="origin"
+                                    label="Origin"
+                                    variant="outlined"
+                                    placeholder="Which universe is the creature from?"
+                                    value={userChoices.origin}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="gender"
+                                    label="Gender"
+                                    variant="outlined"
+                                    placeholder="Male? Female? Other? If unsure, type N/A"
+                                    value={userChoices.gender}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                            </Grid>
 
-                            <TextField
-                                margin="dense"
-                                id="origin"
-                                label="Origin"
-                                variant="outlined"
-                                placeholder="Which universe is the creature from? If unsure, type N/A"
-                                value={userChoices.origin}
-                                onChange={handleInputChange}
-                            />
-                            <TextField
-                                margin="dense"
-                                id="gender"
-                                label="Gender"
-                                variant="outlined"
-                                placeholder="Male or Female? Other? If unsure, type N/A"
-                                value={userChoices.gender}
-                                onChange={handleInputChange}
-                            />
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    id="birthdate"
+                                    label="Birthdate"
+                                    variant="outlined"
+                                    placeholder="Use this format please: YYYY-MM-DD"
+                                    value={userChoices.birthdate}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="imageLocation"
+                                    label="ImageURL"
+                                    variant="outlined"
+                                    placeholder="http://www.google.com"
+                                    value={userChoices.imageLocation}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
 
-                            <TextField
-                                margin="dense"
-                                id="birthdate"
-                                label="Birthdate"
-                                variant="outlined"
-                                placeholder="Use this format please: YYYY-MM-DD"
-                                value={userChoices.birthdate}
-                                onChange={handleInputChange}
-                            />
+                                <TextField
+                                    margin="dense"
+                                    select
+                                    variant="outlined"
+                                    id="userProfileId"
+                                    label="Owner"
+                                    defaultValue=""
+                                    style={{ width: 720 }}
+                                    value={userChoices.userProfileId}
+                                    onChange={handleSelect}
+                                >
+                                    <MenuItem value="0"><em>Human compadre</em></MenuItem>
 
-                            <TextField
-                                margin="dense"
-                                id="imageLocation"
-                                label="ImageURL"
-                                variant="outlined"
-                                placeholder="http://www.google.com"
-                                value={userChoices.imageLocation}
-                                onChange={handleInputChange}
-                            />
+                                    {users.map((user) => (
+                                        <MenuItem key={user.id} value={user.id}>
+                                            {user.fullName}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
 
-                            <TextField
-                                margin="dense"
-                                select
-                                variant="outlined"
-                                id="userProfileId"
-                                label="Owner"
-                                defaultValue=""
-                                style={{ width: 500 }}
-                                value={userChoices.userProfileId}
-                                onChange={handleSelect}
-                            >
-                                <MenuItem value="0"><em>Human compadre</em></MenuItem>
+                                <TextField
+                                    fullWidth
+                                    id="description"
+                                    label="Description"
+                                    variant="outlined"
+                                    multiline
+                                    rows={4}
+                                    placeholder="Short creature bio"
+                                    value={userChoices.description}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                />
 
-                                {users.map((user) => (
-                                    <MenuItem key={user.id} value={user.id}>
-                                        {user.fullName}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                <Stack direction="row" spacing={1} pt={1}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="medium"
+                                        startIcon={<PetsIcon />}
+                                        onClick={() => { navigate("/patients") }}>
+                                        Records
+                                    </Button>
 
-                            <TextField
-                                margin="dense"
-                                id="description"
-                                label="Description"
-                                variant="outlined"
-                                multiline
-                                rows={2}
-                                placeholder="Short creature bio"
-                                value={userChoices.description}
-                                onChange={handleInputChange}
-                            />
-
-                            <Stack direction="row" spacing={1} pb={2} pt={2}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    size="medium"
-                                    endIcon={<SaveRoundedIcon />}
-                                    onClick={handleSaveButtonClick}>
-                                    Save
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    size="medium"
-                                    startIcon={<ClearRoundedIcon />}
-                                    onClick={() => { navigate("/patients") }}>
-                                    Cancel
-                                </Button>
-                            </Stack>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="medium"
+                                        startIcon={<SaveRoundedIcon />}
+                                        onClick={handleSaveButtonClick}>
+                                        Save
+                                    </Button>
+                                </Stack>
 
 
+                            </Grid>
                         </Grid>
-
                     </Grid>
 
-                </Box >
-
+                </Box>
             </Form >
         </>
     )
 }
-

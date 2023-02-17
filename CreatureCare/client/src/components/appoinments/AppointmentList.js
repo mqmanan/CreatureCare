@@ -14,7 +14,7 @@ const AppointmentList = () => {
     return (
         <Container maxWidth="xl">
 
-            <Typography variant="h3" align="center" pb={5}>
+            <Typography variant="h3" align="center" pb={6}>
                 Appointment Tracker
             </Typography>
 
@@ -32,7 +32,7 @@ const AppointmentList = () => {
                     </Grid>
                 ))}
             </Grid>
-        </Container>
+        </Container >
     );
 }
 

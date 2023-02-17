@@ -134,7 +134,7 @@ export default function PatientDetails() {
                                     color="secondary"
                                     size="small"
                                     startIcon={<PersonIcon />}
-                                    onClick={() => { navigate("/staff") }}>
+                                >
                                     {userProfileDoc.fullName}
                                 </Button>
                             </Grid>

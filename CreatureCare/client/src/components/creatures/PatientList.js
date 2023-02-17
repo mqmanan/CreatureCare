@@ -20,7 +20,7 @@ export default function PatientList() {
     return (
         <Container maxWidth="xl">
 
-            <Typography variant="h3" align="center" pb={5}>
+            <Typography variant="h3" align="center" p={3}>
                 Patient Records
             </Typography>
 
@@ -30,7 +30,7 @@ export default function PatientList() {
                 justifyContent="space-evenly"
                 spacing="30"
                 px={25}
-                pb={5}
+                py={3}
             >
                 {creatures.map((creature) => (
                     <Grid item key={creature.id} xs={12} md={3} lg={4}>

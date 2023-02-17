@@ -38,11 +38,12 @@ export default function EditPatientForm() {
         handleInputChange
     } = useForm(initialUserChoiceValues)
 
-    // will render the userProfiles array for drop down menu
+    // will render the creatures array for drop down menu
     useEffect(() => {
         getCreature(id).then(setUserChoices);
     }, [])
 
+    // will render the userProfiles array for drop down menu
     useEffect(() => {
         getAllUserProfiles().then((user) => setUsers(user));
     }, []);
@@ -82,7 +83,7 @@ export default function EditPatientForm() {
             <Form>
                 <Box
                     sx={{
-                        padding: '10px'
+                        padding: '0px'
                     }}>
                     <Grid
                         container
@@ -142,7 +143,6 @@ export default function EditPatientForm() {
                                     id="name"
                                     label="Name"
                                     variant="outlined"
-                                    placeholder="Name of creature?"
                                     value={userChoices.name}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -152,7 +152,6 @@ export default function EditPatientForm() {
                                     id="type"
                                     label="Type"
                                     variant="outlined"
-                                    placeholder="Type of creature? If unsure, type N/A"
                                     value={userChoices.type}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -171,7 +170,6 @@ export default function EditPatientForm() {
                                     id="origin"
                                     label="Origin"
                                     variant="outlined"
-                                    placeholder="Which universe is the creature from? If unsure, type N/A"
                                     value={userChoices.origin}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -181,7 +179,6 @@ export default function EditPatientForm() {
                                     id="gender"
                                     label="Gender"
                                     variant="outlined"
-                                    placeholder="Male or Female? Other? If unsure, type N/A"
                                     value={userChoices.gender}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -194,7 +191,6 @@ export default function EditPatientForm() {
                                     id="birthdate"
                                     label="Birthdate"
                                     variant="outlined"
-                                    placeholder="Use this format please: YYYY-MM-DD"
                                     value={userChoices.birthdate}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -204,7 +200,6 @@ export default function EditPatientForm() {
                                     id="imageLocation"
                                     label="ImageURL"
                                     variant="outlined"
-                                    placeholder="http://www.google.com"
                                     value={userChoices.imageLocation}
                                     onChange={handleInputChange}
                                     margin="dense"
@@ -217,7 +212,6 @@ export default function EditPatientForm() {
                                     variant="outlined"
                                     multiline
                                     rows={4}
-                                    placeholder="Short creature bio"
                                     value={userChoices.description}
                                     onChange={handleInputChange}
                                     margin="dense"

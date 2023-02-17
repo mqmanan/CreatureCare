@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CreatureCare.Models
@@ -8,15 +9,17 @@ namespace CreatureCare.Models
         public int Id { get; set; }
 
         [Required]
-        public string DateRequested { get; set; }
+        public DateTime DateRequested { get; set; }
 
-        public decimal? AmountDue { get; set; }
+        // stretch goal
+        // public decimal? AmountDue { get; set; }
 
-        public string? DateDue { get; set; }
+        public string DateDue { get; set; }
 
-        public decimal? PaidAmount { get; set; }
+        // stretch goal
+        // public decimal? PaidAmount { get; set; }
 
-        public string? InvoiceSentOnDate { get; set; }
+        public string InvoiceSentOnDate { get; set; }
 
         [Required]
         public int UserProfileDocId { get; set; }
