@@ -54,11 +54,10 @@ export default function AppointmentDateTime() {
 
     const handleDateTimeChange = (newValue) => {
         const copy = { ...userChoices }
-        copy.dateRequested = newValue["$d"]
+        copy.dateRequested = newValue["$d"] //the specific property that is capturing the dateTime info
         setUserChoices(copy);
     };
 
-    // work in progress
     const handleSaveButtonClick = (e) => {
         e.preventDefault(); //prevents page from reloading
 
@@ -70,7 +69,7 @@ export default function AppointmentDateTime() {
         ) {
             addAppointment(newAppointment)
                 .then(() => {
-                    alert("This appointment will be under your creature's profile!")
+                    alert("The appointment will be under your creature's profile!")
                     navigate("/")
                 });
         }
