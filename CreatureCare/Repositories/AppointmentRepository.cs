@@ -22,12 +22,12 @@ namespace CreatureCare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                         SELECT  a.Id 'AId', a.CreatureId, c.Name 'CName', a.UserProfileDocId 'DocId', up.FullName 'DocName', up.Telephone, up.Email, 
-                            up.ImageLocation, a.DateRequested, a.AmountDue, a.DateDue, a.PaidAmount, a.InvoiceSentOnDate
+                        SELECT  a.Id 'AId', a.CreatureId, c.Name 'CName', a.UserProfileDocId 'DocId', up.FullName 'DocName', 
+                            up.Telephone, up.Email, up.ImageLocation, a.DateRequested
                         FROM Appointment a
                         LEFT JOIN UserProfile up ON up.Id = a.UserProfileDocId
                         LEFT JOIN Creature c ON c.Id = a.CreatureId
-                        ORDER BY c.Name;
+                        ORDER BY c.Name
                     ";
 
                     var reader = cmd.ExecuteReader();
@@ -41,11 +41,7 @@ namespace CreatureCare.Repositories
                             Id = DbUtils.GetInt(reader, "AId"),
                             CreatureId = DbUtils.GetInt(reader, "CreatureId"),
                             UserProfileDocId = DbUtils.GetInt(reader, "DocId"),
-                            DateRequested = DbUtils.GetString(reader, "DateRequested"),
-                            AmountDue = DbUtils.GetNullableInt(reader, "AmountDue"),
-                            DateDue = DbUtils.GetString(reader, "DateDue"),
-                            PaidAmount = DbUtils.GetNullableInt(reader, "PaidAmount"),
-                            InvoiceSentOnDate = DbUtils.GetString(reader, "InvoiceSentOnDate"),
+                            DateRequested = (DateTime)DbUtils.GetNullableDateTime(reader, "DateRequested"),
                             User = new UserProfile()
                             {
                                 Id = DbUtils.GetInt(reader, "DocId"),
@@ -75,19 +71,16 @@ namespace CreatureCare.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Appointment (
-                            CreatureId, UserProfileDocId, DateRequested, AmountDue,
-                            DateDue, PaidAmount, InvoiceSentOnDate)
+                            CreatureId, UserProfileDocId, DateRequested, DateDue, InvoiceSentOnDate)
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @CreatureId, @UserProfileDocId, @DateRequested, @AmountDue, 
-                            @DateDue, @PaidAmount, @InvoiceSentOnDate)";
+                            @CreatureId, @UserProfileDocId, @DateRequested, 
+                            @DateDue, @InvoiceSentOnDate)";
 
                     DbUtils.AddParameter(cmd, "@CreatureId", appointment.CreatureId);
                     DbUtils.AddParameter(cmd, "@UserProfileDocId", appointment.UserProfileDocId);
                     DbUtils.AddParameter(cmd, "@DateRequested", appointment.DateRequested);
-                    DbUtils.AddParameter(cmd, "@AmountDue", appointment.AmountDue);
                     DbUtils.AddParameter(cmd, "@DateDue", appointment.DateDue);
-                    DbUtils.AddParameter(cmd, "@PaidAmount", appointment.PaidAmount);
                     DbUtils.AddParameter(cmd, "@InvoiceSentOnDate", appointment.InvoiceSentOnDate);
 
                     appointment.Id = (int)cmd.ExecuteScalar();
@@ -95,9 +88,7 @@ namespace CreatureCare.Repositories
             }
         }
 
-
-
-        // returns an empty array in swagger.. still needs work
+        // work in progress.. returns an empty array in swagger
         public List<Appointment> Search(string criterion, bool sortDescending)
         {
             using (SqlConnection conn = Connection)
@@ -138,7 +129,7 @@ namespace CreatureCare.Repositories
                             appointment.Add(new Appointment()
                             {
                                 Id = DbUtils.GetInt(reader, "AId"),
-                                DateRequested = DbUtils.GetString(reader, "DateRequested"),
+                                DateRequested = (DateTime)DbUtils.GetNullableDateTime(reader, "DateRequested"),
                                 User = new UserProfile()
                                 {
                                     Id = DbUtils.GetInt(reader, "UPId"),

@@ -149,9 +149,9 @@ namespace CreatureCare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id 'UserId', up.FullName, up.Email, up.Address, up.Telephone, up.ImageLocation, up.DateCreated, up.UserTypeId 'TypeId'
+                        SELECT up.Id 'UserId', up.FullName, up.Email, up.Address, up.Telephone, up.ImageLocation, up.DateCreated, up.UserTypeId 'TypeId', ut.Name
                         FROM UserProfile up
-                        LEFT JOIN Specialty s ON up.SpecialtyId = s.Id
+                        JOIN UserType ut ON up.UserTypeId = ut.Id
                         WHERE up.UserTypeId = 1
                         ORDER BY up.FullName
                     ";
@@ -164,13 +164,12 @@ namespace CreatureCare.Repositories
                         UserProfile profile = new UserProfile()
                         {
                             Id = DbUtils.GetInt(reader, "UserId"),
-                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                            FullName = DbUtils.GetString(reader, "FirstName"),
-                            Email = DbUtils.GetString(reader, "DisplayName"),
-                            Address = DbUtils.GetString(reader, "Email"),
+                            FullName = DbUtils.GetString(reader, "FullName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            Address = DbUtils.GetString(reader, "Address"),
                             ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                             DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            UserTypeId = DbUtils.GetInt(reader, "TypeId"),
                             UserType = new UserType()
                             {
                                 Id = DbUtils.GetInt(reader, "TypeId"),

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../modules/authManager";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Login() {
                     alignitems="center"
                     justifyContent={'center'}
                     margin="auto"
-                    padding={3}
+                    padding={4}
                     borderRadius={5}
                     boxShadow={"5px 5px 10px #ccc"}
                     sx={{
@@ -38,9 +39,16 @@ export default function Login() {
                     }}
 
                 >
-                    <Typography variant="h3" padding={2} textAlign="center">
-                        Login
-                    </Typography>
+                    <Player
+                        src='https://assets9.lottiefiles.com/private_files/lf30_ISHFyg.json'
+                        className="player"
+                        loop
+                        autoplay
+                        style={{
+                            height: '100px',
+                            width: '110px',
+                        }}
+                    />
 
                     <TextField
                         margin="dense"

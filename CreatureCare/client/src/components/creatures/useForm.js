@@ -32,10 +32,8 @@ export function useForm(initialUserChoiceValues) {
 export function Form(props) {
 
     return (
-        <Box>
-            <form>
-                {props.children}
-            </form>
-        </Box>
+        <form>
+            {props.children}
+        </form>
     )
 }

@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 const AppointmentCard = ({ appointment }) => {
     const navigate = useNavigate();
 
+    // stretch goal ---- add time from dateRequested
+
     return (
         <Card
             sx={{
@@ -30,18 +32,17 @@ const AppointmentCard = ({ appointment }) => {
                     <b>Patient</b>:  {appointment?.creature?.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    <b>Appointment</b>: {appointment.dateRequested}
+                    <b>Appointment</b>: {appointment.dateRequested.split('T')[0]}
                 </Typography>
             </CardContent>
             <CardActions display="flex" justifyContent="center">
                 <Button
                     size="small"
-                    onClick={() => { navigate(`/appointments/${appointment.id}`) }}>
-                    See Details</Button>
+                > See Details
+                </Button>
             </CardActions>
         </Card>
     );
 };
 
 export default AppointmentCard;
-

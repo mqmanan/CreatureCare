@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from "react-router-dom";
 import { logout } from '../../modules/authManager';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 export default function NavBar({ isLoggedIn, userProfile }) {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function NavBar({ isLoggedIn, userProfile }) {
                     color='inherit'
                     onClick={() => { navigate("/") }}
                     aria-label='logo'>
-                    <CatchingPokemonIcon />
+                    <LocalHospitalIcon />
                 </IconButton>
                 <Typography variant='h6' component='div' href="/" sx={{ flexGrow: 1 }}>
                     CreatureCare
@@ -62,33 +63,25 @@ export default function NavBar({ isLoggedIn, userProfile }) {
                             <MenuItem
                                 onClick={(event) => {
                                     handleClose(event)
-                                    navigate("/appointments")
-                                }}>
-                                Appointments
-                            </MenuItem>
-                            <MenuItem
-                                onClick={(event) => {
-                                    handleClose(event)
                                     navigate("/patients")
                                 }}>
-                                Patient Records
+                                Patient Records*
                             </MenuItem>
                             <MenuItem
                                 onClick={(event) => {
                                     handleClose(event)
-                                    navigate("/patients/add")
+                                    navigate("/appointments")
                                 }}>
-                                Add Patient
+                                Appointments*
                             </MenuItem>
                         </Menu>
 
                         <Button
                             tag={RRNavLink}
                             color='inherit'
-                            onClick={() => { navigate("/staff") }}>
-                            Staff
+                            onClick={() => { navigate("/patients/add") }}>
+                            Add Patient
                         </Button>
-
                         <Button
                             tag={RRNavLink}
                             color='inherit'

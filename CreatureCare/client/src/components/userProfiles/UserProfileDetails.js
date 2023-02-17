@@ -72,7 +72,7 @@ const UserProfileDetails = () => {
                         }}
 
                     >
-                        <Stack direction="row" spacing={1} pb={2}>
+                        <Stack direction="row" spacing={1}>
                             <Fab
                                 aria-label='records'
                                 color='primary'
@@ -82,14 +82,6 @@ const UserProfileDetails = () => {
                                 <ArrowBackIcon />
                             </Fab>
 
-                            <Fab
-                                aria-label='edit'
-                                color='primary'
-                                size='small'
-                                onClick={() => { navigate(`/`) }}
-                            >
-                                <ModeIcon />
-                            </Fab>
                         </Stack>
                     </CardActions>
                 </Card>
@@ -131,7 +123,7 @@ const UserProfileDetails = () => {
                                     color="secondary"
                                     size="small"
                                     startIcon={<PetsIcon />}
-                                    onClick={() => { navigate("/") }}>
+                                >
                                     {userCreature.name}
                                 </Button>
                             </Grid>
