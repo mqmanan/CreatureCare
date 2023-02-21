@@ -48,13 +48,13 @@ When the user first enters the website, they are prompted to Register or Login.
 
 Once logged in, the user sees a welcome screen that displays their username & the functionalities of the applicaiton (including stretch goals). 
 
-For now, the main functionalities for the user is the `Add Patient` & `Schedule Appointment` features. The user is able to add a pet (only under their profile only) and schedule an appointment (only for their pets). 
+For now, the main functionalities for the user is the `Add Patient` & `Schedule Appointment` features. The user is able to add a pet & schedule an appointment (but only for their pets). 
 
-To view the list of pets they added into the application, a user can see their profile at `Profile` which will also show them a list of their pets. (Future stretch goals includes an appointment list for each pet here.)
+To view the list of pets they added, a user can see their profile at `Profile` which will also show them a list of their pets. (Future stretch goals includes an appointment list for each pet here.)
 
 
 ### Admins
 
 Along with being able to `Add Patient` & `Schedule Appointment`, Admins are able to see a list of all patients and appointments from every user. They are also able to `Edit Patient`, `Delete Patient`, & `Add Patient` -- for any user. (Future stretch goals includes an Edit & Delete functions for appointments.)
 
-Currently, there is a search function under `Appointment Tracker` that is being worked on. (Futre stretch goals includes implementing a similar search bar under `Patient Records`.) 
+Currently, there is a search function under `Appointment Tracker` that is being worked on. (Futre stretch goals includes implementing a similar search bar or a filters select menu under `Patient Records`.) 
