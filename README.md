@@ -42,7 +42,7 @@ Back in the **`client`** directory, type `npm start`
 
 ## How does it work?
 
-## Users
+### Users
 
 When the user first enters the website, they are prompted to Register or Login.
 
