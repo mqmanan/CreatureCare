@@ -20,7 +20,7 @@ CreatureCare is a full-stack web application that organizations can use to manag
   
 ## API
 
-![ERD](https://www.dropbox.com/s/0mtbl2nhd36qcgr/CreatureCare.png?dl=0)
+![ERD](https://github.com/mqmanan/CreatureCare/blob/a3ab80c4f6174e58b4c08bf39f38cfaf57554c96/CreatureCare.png)
 This is a visual representation of the Database.  
 
 # Installation
