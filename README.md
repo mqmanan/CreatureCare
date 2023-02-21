@@ -9,6 +9,7 @@ CreatureCare is a full-stack web application that organizations can use to manag
 - [React.js](https://reactjs.org/)
 - [React Router](https://reactrouter.com/en/main)
 - [Material UI](https://mui.com/)
+- [LottieFiles](https://lottiefiles.com/)
 
 ### Back End
 
@@ -47,9 +48,10 @@ When the user first enters the website, they are prompted to Register or Login. 
 
 Once logged in, the user sees a welcome screen that displays their username & the functionalities of the applicaiton (including stretch goals). 
 
-The main functionalities for the user is the `Add Patient` & `Schedule Appointment` features. The user is able to add a pet (only under their profile only) and schedule an appointment (only for their pets). 
+For now, the main functionalities for the user is the `Add Patient` & `Schedule Appointment` features. The user is able to add a pet (only under their profile only) and schedule an appointment (only for their pets). 
 
 To view the list of pets they added into the application, a user can see their profile at `Profile` which will also show them a list of their pets. (Future stretch goals includes an appointment list for each pet here.)
+
 
 ### Admins
 
