@@ -44,7 +44,7 @@ Back in the **`client`** directory, type `npm start`
 
 ## Users
 
-When the user first enters the website, they are prompted to Register or Login. The registration form has two parts: credentials & other user information.
+When the user first enters the website, they are prompted to Register or Login.
 
 Once logged in, the user sees a welcome screen that displays their username & the functionalities of the applicaiton (including stretch goals). 
 
