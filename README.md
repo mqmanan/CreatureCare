@@ -57,4 +57,4 @@ To view the list of pets they added, a user can see their profile at `Profile` w
 
 Along with being able to `Add Patient` & `Schedule Appointment`, Admins are able to see a list of all patients and appointments from every user. They are also able to `Edit Patient`, `Delete Patient`, & `Add Patient` -- for any user. (Future stretch goals includes an Edit & Delete functions for appointments.)
 
-Currently, there is a search function under `Appointment Tracker` that is being worked on. (Futre stretch goals includes implementing a similar search bar or a filters select menu under `Patient Records`.) 
+Currently, there is a search function under `Appointment Tracker` that is being worked on. (Future stretch goals includes implementing a similar search bar or a filters select menu under `Patient Records`.) 
